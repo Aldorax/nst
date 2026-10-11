@@ -171,7 +171,7 @@ function MobileMenu() {
         </nav>
         <div className="menu-footer">
           <a href="mailto:legadax@outlook.com">legadax@outlook.com</a>
-          <p>NON STANDARD TEAM / PROJECTS FROM $2,000</p>
+          <p>NON STANDARD TEAM / WORLDWIDE</p>
         </div>
       </dialog>
     </div>

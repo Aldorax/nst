@@ -2,6 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import { gsap } from "gsap";
+import { radialPath } from "./forms";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
@@ -19,13 +20,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           scaleX: 1,
           ease: "none",
           scrollTrigger: { start: 0, end: "max", scrub: 0.3 },
-        });
-        gsap.to(".knot", {
-          rotation: 10,
-          duration: 7,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
         });
         const splits: SplitText[] = [];
         const hero = SplitText.create("#hero-title", {
@@ -54,22 +48,12 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             delay: 0.55,
           },
         );
-        gsap.from(".hero-art", {
-          scale: 0.75,
+        gsap.from(".sculpture", {
+          y: 30,
           opacity: 0,
-          duration: 1.5,
+          duration: 1.2,
           ease: "power3.out",
-          delay: 0.15,
-        });
-        gsap.to(".hero-art", {
-          y: 40,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
+          delay: 0.2,
         });
         gsap.utils
           .toArray<HTMLElement>(
@@ -98,7 +82,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           });
         gsap.utils
           .toArray<HTMLElement>(
-            ".section-top, .project-caption, .concept-note, .services-list details, .pricing-services > div, .team-center > p, .team-center > button, .pricing-panel",
+            ".section-top, .project-caption, .concept-note, .services-list details, .team-center > p, .team-center > button, .pricing-panel",
           )
           .forEach((element) =>
             gsap.from(element, {
@@ -154,6 +138,49 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             });
           }
         });
+        gsap.utils
+          .toArray<SVGPathElement>(".craft-mark path")
+          .forEach((path, i) => {
+            gsap.to(path, {
+              attr: { d: radialPath(i + 4, 22, Math.PI / 2) },
+              duration: 4 + i,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+              scrollTrigger: {
+                trigger: ".team-section",
+                start: "top bottom",
+                end: "bottom top",
+                toggleActions: "play pause resume pause",
+              },
+            });
+          });
+        gsap.to(".orbit-shape", {
+          y: -18,
+          rotation: -14,
+          duration: 4,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+          scrollTrigger: {
+            trigger: ".project-orbit",
+            start: "top bottom",
+            end: "bottom top",
+            toggleActions: "play pause resume pause",
+          },
+        });
+        gsap.to(".pulse-waves i", {
+          scaleY: 0.55,
+          duration: 1.8,
+          stagger: { each: 0.09, repeat: -1, yoyo: true },
+          ease: "sine.inOut",
+          scrollTrigger: {
+            trigger: ".project-pulse",
+            start: "top bottom",
+            end: "bottom top",
+            toggleActions: "play pause resume pause",
+          },
+        });
         gsap.utils.toArray<HTMLElement>(".timeline-phase").forEach((phase, i) =>
           gsap.from(phase, {
             x: -65,
@@ -190,20 +217,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             scrub: 1,
           },
         });
-        const onPointer = (event: PointerEvent) => {
-          if (event.pointerType !== "mouse") return;
-          const art = document.querySelector<HTMLElement>(".knot");
-          if (art) {
-            gsap.to(art, {
-              x: (event.clientX / innerWidth - 0.5) * 25,
-              y: (event.clientY / innerHeight - 0.5) * 18,
-              duration: 1.2,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          }
-        };
-        window.addEventListener("pointermove", onPointer, { passive: true });
         const onDisclosure = () => ScrollTrigger.refresh();
         document
           .querySelectorAll("details")
@@ -216,7 +229,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             ),
         );
         return () => {
-          window.removeEventListener("pointermove", onPointer);
           cleanups.splice(0).forEach((clean) => clean());
           splits.forEach((split) => split.revert());
         };

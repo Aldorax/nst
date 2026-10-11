@@ -1,3 +1,4 @@
+import { radialPath } from "./forms";
 import { ContactButton } from "./ui";
 import { PricingSelector } from "./pricing";
 
@@ -45,7 +46,23 @@ export function TeamSection() {
           >
             <span className="craft-index">OUR CRAFT / 0{i + 1}</span>
             <span className="craft-glyph" aria-hidden="true">
-              {craft.glyph}
+              {i === 3 ? (
+                craft.glyph
+              ) : (
+                <svg className="craft-mark" viewBox="0 0 200 200" fill="none">
+                  <path
+                    data-form={i}
+                    d={radialPath(i + 3, i === 1 ? 8 : 18)}
+                    fill="currentColor"
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r={i === 1 ? 31 : 15}
+                    fill={i === 1 ? "#232d1a" : i === 0 ? "#c3f85c" : "#ffc0a8"}
+                  />
+                </svg>
+              )}
             </span>
             <span className="craft-name">{craft.label}</span>
             <span className="craft-note">{craft.note}</span>
@@ -53,14 +70,15 @@ export function TeamSection() {
         ))}
         <div className="team-center">
           <span className="eyebrow">FOUR PEOPLE. FIVE SERVICES.</span>
-          <h2 id="team-title" aria-label="Four people. One connected team.">
-            Four people.
+          <h2 id="team-title" aria-label="Small team. Uncommon ambition.">
+            Small team.
             <br />
-            <em>One connected team.</em>
+            <em>Uncommon ambition.</em>
           </h2>
           <p>
-            We’re NST: Non Standard Team. A four-person agency bringing design,
-            development, motion, and writing together around your project.
+            Four specialists. Direct collaboration.
+            <br />
+            Design, code, motion, and words in sync.
           </p>
           <ContactButton className="dark-pill">Start a project</ContactButton>
         </div>
@@ -139,9 +157,8 @@ export function TimelineSection() {
           to <em>launch.</em>
         </h2>
         <p>
-          See what happens, when decisions are needed,
-          <br />
-          and how the work comes together.
+          Clear milestones.
+          <br />A shared vision from day one.
         </p>
       </div>
       <div className="timeline-scroll">
@@ -179,9 +196,8 @@ export function TimelineSection() {
         </div>
       </div>
       <p className="timeline-note">
-        <span>↳</span> An example eight-week brand and website project. We agree
-        your schedule around the scope before work begins. Select a phase to
-        learn more.
+        <span>↳</span> An example eight-week engagement. Your schedule is agreed
+        around your scope.
       </p>
     </section>
   );
@@ -196,34 +212,20 @@ export function PricingSection() {
     >
       <div className="pricing-intro">
         <span className="eyebrow">05 / GOOD WORK. CLEAR INVESTMENT.</span>
-        <h2 id="pricing-title" aria-label="A starting price. A clear scope.">
-          A starting price.
+        <h2 id="pricing-title" aria-label="Ambitious work. Clear investment.">
+          Ambitious work.
           <br />
-          <em>A clear scope.</em>
+          <em>Clear investment.</em>
         </h2>
         <p>
           Every service starts at <strong>$2,000.</strong>
           <br />
-          Your quote reflects the deliverables, complexity, and support you
-          need.
+          A focused brief or a complete launch.
+          <br />
+          The scope sets the investment.
         </p>
-        <div className="pricing-services">
-          {[
-            "Website development",
-            "Branding & identity",
-            "UI / UX design",
-            "Motion & video",
-            "Copy & technical writing",
-          ].map((item) => (
-            <div key={item}>
-              <span>{item}</span>
-              <span>FROM $2,000</span>
-            </div>
-          ))}
-        </div>
         <p className="pricing-footnote">
-          All prices in USD. Starting prices apply to individual services;
-          combining services changes the total scope.
+          All prices in USD. Each engagement is scoped individually.
         </p>
       </div>
       <PricingSelector />

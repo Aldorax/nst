@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-export const alt = "NST — Non Standard Team. Anything but standard.";
+export const alt = "NST — Non Standard Team. Anything but ordinary.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export default function Image() {
@@ -51,7 +51,7 @@ export default function Image() {
           }}
         >
           <span>Anything</span>
-          <span style={{ color: "#c3f85c" }}>but standard.</span>
+          <span style={{ color: "#c3f85c" }}>but ordinary.</span>
         </div>
         <div
           style={{

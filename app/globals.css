@@ -333,9 +333,9 @@ h2 em {
 }
 .hero-composition {
   display: grid;
-  grid-template-columns: 1.12fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   align-items: center;
-  min-height: 550px;
+  min-height: 620px;
   position: relative;
 }
 .hero-copy {
@@ -365,74 +365,144 @@ h2 em {
   color: var(--muted);
   margin: 29px 0 26px;
 }
-.hero-art {
-  height: 520px;
+.sculpture {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: -20px;
+  min-width: 0;
+  width: 100%;
+}
+.sculpture-stage {
+  position: relative;
+  height: 520px;
   isolation: isolate;
 }
-.knot {
-  height: auto;
-  width: 108%;
-  max-width: 610px;
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 22px 20px #0004);
-}
-.art-orbit {
+.sculpture-canvas {
   position: absolute;
-  width: 81%;
-  aspect-ratio: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.sculpture[data-renderer="webgl"] .sculpture-canvas {
+  opacity: 1;
+}
+.sculpture-orbit {
+  position: absolute;
+  inset: 12% 6%;
   border: 1px solid var(--line);
   border-radius: 50%;
-  transform: rotate(-25deg) scaleY(0.93);
+  transform: rotate(-20deg) scaleY(0.88);
+  opacity: 0.45;
 }
-.art-orbit:before,
-.art-orbit:after {
+.sculpture-orbit::after {
   content: "";
   position: absolute;
-  inset: -25px;
+  inset: 20px;
   border: 1px dashed var(--line);
   border-radius: 50%;
-  opacity: 0.6;
 }
-.art-orbit:after {
-  inset: 35px;
-  border-style: solid;
-}
-.art-cross {
+.sculpture-fallback {
   position: absolute;
-  font-size: 22px;
-  font-weight: 300;
-  color: var(--accent-text);
-  z-index: 3;
+  inset: 18% 13%;
+  border-radius: 45% 55% 40% 60% / 60% 40% 55% 45%;
+  background: linear-gradient(
+    145deg,
+    #f1f7e6 2%,
+    #939e85 18%,
+    #19251a 33%,
+    #d8ecc1 43%,
+    #272c26 48%,
+    #a0b484 58%,
+    #ecfbd2 64%,
+    #182111 80%,
+    #c4d1b9
+  );
+  box-shadow:
+    inset -15px -20px 30px #17211166,
+    0 20px 40px #0002;
+  transform: rotate(-18deg);
 }
-.cross-one {
-  left: 14%;
-  top: 13%;
+.sculpture[data-form="1"] .sculpture-fallback {
+  border-radius: 50%;
+  mask-image: radial-gradient(circle, transparent 31%, #000 33%);
 }
-.cross-two {
-  right: 6%;
-  bottom: 19%;
+.sculpture[data-form="2"] .sculpture-fallback {
+  border-radius: 35% 65% 35% 65% / 65% 35% 65% 35%;
 }
-.art-caption,
-.art-coordinate {
+.sculpture[data-renderer="webgl"] .sculpture-fallback {
+  visibility: hidden;
+}
+.sculpture-coordinate {
   position: absolute;
+  top: 27px;
+  right: 0;
   font:
-    8px/1.6 var(--font-code),
+    9px var(--font-code),
     monospace;
   color: var(--muted);
 }
-.art-caption {
-  bottom: 18px;
-  left: 19%;
-}
-.art-coordinate {
+.sculpture-note {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
   right: 0;
-  top: 55px;
+  text-align: center;
+  font:
+    9px var(--font-code),
+    monospace;
+  color: var(--muted);
+}
+.sculpture-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 3px;
+}
+.sculpture-controls > div {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 4px;
+}
+.sculpture-controls > div button {
+  min-height: 44px;
+  border-radius: 24px;
+  padding: 0 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--muted);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.sculpture-controls button[aria-pressed="true"] {
+  background: var(--foreground);
+  color: var(--background);
+}
+.sculpture-controls > div button span {
+  font:
+    8px var(--font-code),
+    monospace;
+  opacity: 0.55;
+}
+.sculpture-pause {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.sculpture-pause:disabled {
+  opacity: 0.4;
+}
+.sculpture-pause svg {
+  width: 16px;
+  height: 16px;
 }
 .hero-bottom {
   display: flex;
@@ -549,12 +619,12 @@ h2 em {
 .project-visual {
   display: block;
   width: 100%;
-  height: 365px;
+  height: 470px;
   position: relative;
   overflow: hidden;
   text-align: left;
   padding: 34px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 .project-visual > *:first-child {
   transition: transform 0.5s;
@@ -595,13 +665,13 @@ h2 em {
   min-width: 0;
 }
 .project-caption h3 {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 500;
   letter-spacing: -0.5px;
   margin: 0 0 7px;
 }
 .project-caption p {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--muted);
   margin: 0;
@@ -624,14 +694,19 @@ h2 em {
   color: var(--accent-text);
   margin-right: 8px;
 }
+.project-orbit {
+  grid-column: 1 / -1;
+}
 .project-orbit .project-visual {
-  background: #ab96d0;
+  height: 570px;
+  padding: 40px;
+  background: #a38abe;
 }
 .mock-browser {
   height: 100%;
   background: #efeaf8;
   color: #2f2042;
-  padding: 23px 24px;
+  padding: 36px 42px;
   overflow: hidden;
   box-shadow: 0 6px 20px #4d36642a;
   position: relative;
@@ -643,7 +718,7 @@ h2 em {
   align-items: center;
 }
 .mock-nav > strong {
-  font-size: 22px;
+  font-size: 32px;
   letter-spacing: -1.3px;
 }
 .mock-nav > strong > span {
@@ -651,44 +726,44 @@ h2 em {
   vertical-align: super;
 }
 .mock-nav > span {
-  font-size: 6px;
+  font-size: 10px;
 }
 .orbit-copy {
-  font-size: 35px;
+  font-size: 72px;
   line-height: 1.04;
   letter-spacing: -1.8px;
   position: relative;
   z-index: 2;
-  margin-top: 32px;
+  margin-top: 72px;
 }
 .orbit-copy em {
   font-family: Georgia, serif;
   font-weight: 400;
 }
 .orbit-sub {
-  font-size: 7px;
+  font-size: 12px;
   margin: 12px 0 16px;
 }
 .mock-cta {
-  font-size: 6px;
-  padding: 7px 10px;
+  font-size: 10px;
+  padding: 12px 18px;
   background: #3c2657;
   color: white;
   border-radius: 3px;
 }
 .orbit-shape {
   position: absolute;
-  width: 190px;
-  height: 180px;
-  right: -12px;
-  top: 81px;
+  width: 380px;
+  height: 330px;
+  right: 2%;
+  top: 115px;
   transform: rotate(-28deg);
 }
 .orbit-shape i {
   position: absolute;
   border-radius: 50%;
-  width: 165px;
-  height: 88px;
+  width: 330px;
+  height: 176px;
   background: linear-gradient(
     160deg,
     #eddfff,
@@ -703,30 +778,30 @@ h2 em {
 .orbit-shape i:after {
   content: "";
   position: absolute;
-  width: 95px;
-  height: 45px;
-  left: 34px;
-  top: 15px;
+  width: 190px;
+  height: 90px;
+  left: 68px;
+  top: 30px;
   border-radius: 50%;
   background: linear-gradient(#29113f, #a18eb9);
   box-shadow: inset 0 5px 9px #29113f;
 }
 .orbit-shape i:nth-child(2) {
-  top: 39px;
-  left: 17px;
-}
-.orbit-shape i:nth-child(3) {
   top: 78px;
   left: 34px;
+}
+.orbit-shape i:nth-child(3) {
+  top: 156px;
+  left: 68px;
 }
 .mock-bottom {
   position: absolute;
   bottom: 18px;
-  left: 24px;
-  right: 24px;
+  left: 42px;
+  right: 42px;
   border-top: 1px solid #cfc4dd;
   padding-top: 12px;
-  font-size: 6px;
+  font-size: 9px;
   display: flex;
   justify-content: space-between;
 }
@@ -773,94 +848,12 @@ h2 em {
   position: absolute;
   bottom: 26px;
 }
-.form-badge {
-  position: absolute;
-  right: 28px;
-  bottom: 28px;
-  font:
-    54px Georgia,
-    serif;
-}
-.form-badge > span {
-  font-size: 12px;
-  vertical-align: top;
-}
-.chair-art {
-  position: absolute;
-  width: 205px;
-  height: 255px;
-  right: 50px;
-  top: 65px;
-  transform: rotate(-9deg);
-}
-.chair-back {
-  position: absolute;
-  left: 35px;
-  top: 0;
-  width: 125px;
-  height: 126px;
-  border-radius: 60% 50% 26% 20%;
-  background: linear-gradient(
-    110deg,
-    #77754d,
-    #b4b285 40%,
-    #8b8c5e 70%,
-    #595a3c
-  );
-  box-shadow:
-    inset 6px 0 6px #d9d4a944,
-    5px 2px 6px #55542b22;
-  transform: skewY(-8deg);
-}
-.chair-seat {
-  position: absolute;
-  left: 20px;
-  top: 105px;
-  width: 155px;
-  height: 59px;
-  border-radius: 50% 38% 40% 35%;
-  background: linear-gradient(
-    165deg,
-    #b5b187,
-    #9f9b6b 45%,
-    #66683f 60%,
-    #8b8b59
-  );
-  transform: rotate(-6deg);
-  z-index: 2;
-  box-shadow: 0 8px 8px #53552a22;
-}
-.chair-leg {
-  position: absolute;
-  top: 142px;
-  width: 14px;
-  height: 98px;
-  background: linear-gradient(90deg, #48492e, #a9a26d, #646644);
-  z-index: 1;
-}
-.leg-one {
-  left: 41px;
-  transform: rotate(9deg);
-}
-.leg-two {
-  left: 147px;
-  transform: rotate(-10deg);
-}
-.chair-shadow {
-  position: absolute;
-  bottom: 0;
-  width: 190px;
-  height: 18px;
-  background: #39382133;
-  border-radius: 50%;
-  filter: blur(10px);
-  transform: rotate(8deg);
-}
+
 .project-pulse {
-  grid-column: 1/-1;
+  grid-column: auto;
 }
 .project-pulse .project-visual {
-  height: 370px;
+  height: 470px;
   padding: 0;
   background: #ff602c;
 }
@@ -886,7 +879,7 @@ h2 em {
   letter-spacing: 1px;
 }
 .pulse-title {
-  font-size: 83px;
+  font-size: 66px;
   line-height: 0.95;
   letter-spacing: -5px;
   position: relative;
@@ -907,7 +900,7 @@ h2 em {
 }
 .pulse-waves {
   position: absolute;
-  right: 7%;
+  right: -18%;
   height: 105%;
   width: 43%;
   top: 0;
@@ -1018,11 +1011,7 @@ details[open] .expand-icon:after {
   line-height: 1.8;
   color: var(--muted);
 }
-.service-note {
-  color: var(--foreground);
-  margin-bottom: 14px;
-  font-weight: 500;
-}
+
 .service-tags {
   display: flex;
   gap: 8px;
@@ -1306,6 +1295,12 @@ details[open] .expand-icon:after {
 .team-center .dark-pill {
   display: inline-flex;
 }
+.craft-mark {
+  width: 110px;
+  height: 110px;
+  display: block;
+  margin: auto;
+}
 /* Investment */
 .pricing-section {
   display: grid;
@@ -1330,25 +1325,7 @@ details[open] .expand-icon:after {
   color: var(--foreground);
   font-weight: 500;
 }
-.pricing-services {
-  margin-top: 30px;
-}
-.pricing-services > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  border-bottom: 1px solid var(--line);
-  padding: 17px 0;
-  font-size: 14px;
-}
-.pricing-services > div > span:last-child {
-  font:
-    10px var(--font-code),
-    monospace;
-  color: var(--muted);
-  white-space: nowrap;
-}
+
 .pricing-footnote {
   font-size: 11px !important;
   line-height: 1.7 !important;
@@ -1421,24 +1398,7 @@ details[open] .expand-icon:after {
   color: var(--muted);
   margin-block: 24px;
 }
-.investment-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 28px;
-  display: grid;
-  gap: 13px;
-}
-.investment-content li {
-  font-size: 12px;
-  line-height: 1.6;
-  display: flex;
-  gap: 12px;
-}
-.investment-content li:before {
-  content: "✓";
-  color: var(--accent-text);
-  flex-shrink: 0;
-}
+
 .investment-content .pill-button {
   width: 100%;
 }
@@ -1786,9 +1746,6 @@ details[open] .expand-icon:after {
     gap: 12px;
     font-size: 11px;
   }
-  .hero-art {
-    height: 460px;
-  }
   .hero-composition {
     min-height: 500px;
   }
@@ -1822,11 +1779,6 @@ details[open] .expand-icon:after {
   }
   .form-title {
     font-size: 37px;
-  }
-  .chair-art {
-    right: 20px;
-    top: 50px;
-    transform: scale(0.88) rotate(-9deg);
   }
   .project-caption > span {
     font-size: 8px;
@@ -2071,36 +2023,6 @@ details[open] .expand-icon:after {
   .desktop-break {
     display: none;
   }
-  .hero-art {
-    height: 330px;
-    max-width: 420px;
-    margin: 10px auto 0;
-  }
-  .knot {
-    width: 100%;
-    max-height: 370px;
-  }
-  .art-orbit {
-    width: 70%;
-  }
-  .art-caption {
-    font-size: 6px;
-    left: 25%;
-    bottom: 9px;
-  }
-  .art-coordinate {
-    font-size: 6px;
-    right: 4%;
-    top: 42px;
-  }
-  .cross-one {
-    left: 17%;
-    top: 15%;
-  }
-  .cross-two {
-    right: 12%;
-    bottom: 22%;
-  }
   .hero-bottom {
     padding: 15px 0 25px;
     gap: 12px;
@@ -2165,11 +2087,6 @@ details[open] .expand-icon:after {
   }
   .form-title {
     font-size: 41px;
-  }
-  .chair-art {
-    right: 30px;
-    top: 50px;
-    transform: scale(0.93) rotate(-9deg);
   }
   .project-pulse {
     grid-column: auto;
@@ -2358,13 +2275,7 @@ details[open] .expand-icon:after {
   .pricing-intro > p {
     font-size: 15px;
   }
-  .pricing-services > div {
-    font-size: 13px;
-    padding: 15px 0;
-  }
-  .pricing-services > div > span:last-child {
-    font-size: 9px;
-  }
+
   .investment-content {
     padding: 24px;
   }
@@ -2380,9 +2291,7 @@ details[open] .expand-icon:after {
   .investment-description {
     font-size: 14px;
   }
-  .investment-content li {
-    font-size: 12px;
-  }
+
   .investment-note {
     font-size: 7px;
   }
@@ -2406,9 +2315,6 @@ details[open] .expand-icon:after {
   .contact-bottom p {
     font-size: 15px;
     margin-bottom: 24px;
-  }
-  .contact-bottom p br {
-    display: none;
   }
   .site-footer {
     flex-wrap: wrap;
@@ -2460,6 +2366,86 @@ details[open] .expand-icon:after {
   }
   .brief-actions > .pill-button {
     width: 100%;
+  }
+}
+@media (max-width: 899px) {
+  .sculpture-stage {
+    height: 430px;
+  }
+  .project-orbit .project-visual {
+    height: 500px;
+    padding: 28px;
+  }
+  .orbit-copy {
+    font-size: 55px;
+  }
+  .orbit-shape {
+    right: -3%;
+    transform: scale(0.8) rotate(-28deg);
+  }
+}
+@media (max-width: 760px) {
+  .sculpture-stage {
+    height: 360px;
+  }
+  .sculpture {
+    margin-top: 12px;
+  }
+  .sculpture-coordinate {
+    top: 12px;
+    font-size: 8px;
+    right: 10px;
+  }
+  .sculpture-note {
+    font-size: 8px;
+  }
+  .sculpture-controls > div button {
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+  .sculpture-controls {
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+  .project-orbit .project-visual {
+    height: 400px;
+    padding: 18px;
+  }
+  .mock-browser {
+    padding: 22px;
+  }
+  .mock-nav > strong {
+    font-size: 24px;
+  }
+  .mock-nav > span {
+    font-size: 6px;
+  }
+  .orbit-copy {
+    font-size: 36px;
+    margin-top: 48px;
+  }
+  .orbit-sub {
+    font-size: 8px;
+  }
+  .mock-cta {
+    font-size: 7px;
+    padding: 9px 12px;
+  }
+  .orbit-shape {
+    top: 135px;
+    right: -120px;
+    transform: scale(0.6) rotate(-28deg);
+    transform-origin: center;
+  }
+  .mock-bottom {
+    left: 22px;
+    right: 22px;
+    font-size: 6px;
+  }
+  .craft-mark {
+    width: 75px;
+    height: 75px;
   }
 }
 @media (max-width: 600px) {
@@ -2530,9 +2516,6 @@ details[open] .expand-icon:after {
   .form-title {
     font-size: 35px;
   }
-  .chair-art {
-    right: 5px;
-  }
   .team-center h2 {
     font-size: 38px;
   }
@@ -2552,6 +2535,29 @@ details[open] .expand-icon:after {
     font-size: 54px;
   }
 }
+.investment-assurance {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  margin: 20px 0 8px;
+}
+.form-image {
+  object-fit: cover;
+  object-position: 60% 50%;
+  z-index: 0;
+}
+.form-poster > :not(.form-image) {
+  position: relative;
+  z-index: 1;
+}
+.form-poster .form-title {
+  position: absolute;
+}
+.form-poster .form-caption {
+  position: absolute;
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -2563,6 +2569,9 @@ details[open] .expand-icon:after {
     transition: none !important;
   }
   .scroll-meter {
+    display: none;
+  }
+  .sculpture-pause {
     display: none;
   }
 }

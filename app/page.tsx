@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Sculpture } from "./sculpture";
 import { ArrowIcon } from "./icons";
 import { SiteHeader } from "./navigation";
 import { BrandLogo } from "./brand";
@@ -15,9 +16,8 @@ import {
 const services = [
   {
     name: "Website development",
-    note: "Websites built for your business.",
     description:
-      "Responsive websites and web applications with clear content, considered interactions, and a foundation your team can maintain.",
+      "Fast, expressive websites and applications. Built to perform and easy to manage.",
     tags: [
       "Creative development",
       "Web applications",
@@ -27,9 +27,8 @@ const services = [
   },
   {
     name: "Branding & identity",
-    note: "Give people a reason to remember you.",
     description:
-      "Positioning, identity, and guidelines that make your business recognisable and consistent across every touchpoint.",
+      "Positioning, identity, and design systems that make your business unmistakable.",
     tags: [
       "Brand strategy",
       "Visual identity",
@@ -39,16 +38,14 @@ const services = [
   },
   {
     name: "UI / UX design",
-    note: "Make the next step feel obvious.",
     description:
-      "Research, flows, and interfaces that help people understand your product and use it with confidence.",
+      "Intuitive products. Considered journeys. Interfaces people want to use.",
     tags: ["User research", "Product design", "Prototyping", "Design systems"],
   },
   {
     name: "Motion & video",
-    note: "Show what words alone cannot.",
     description:
-      "Brand animation, product films, and explainers that give your ideas movement and clarity.",
+      "Brand animation, product films, and explainers that turn attention into understanding.",
     tags: [
       "Brand animation",
       "Explainer videos",
@@ -58,9 +55,8 @@ const services = [
   },
   {
     name: "Copy & technical writing",
-    note: "Say what matters. Make it clear.",
     description:
-      "Website copy, brand voice, and technical documentation that help customers decide and developers get things done.",
+      "A clear voice for your brand. Useful words for your customers and developers.",
     tags: [
       "Website copy",
       "Brand voice",
@@ -81,59 +77,43 @@ export default function Home() {
         <section className="hero wrap" aria-labelledby="hero-title">
           <div className="hero-topline">
             <span>
-              <i className="status-dot" /> Four people. One connected team.
+              <i className="status-dot" /> Independent minds. Shared ambition.
             </span>
-            <span className="small-code">
-              BRANDING / WEBSITES / DIGITAL PRODUCTS
-            </span>
+            <span className="small-code">NST / DESIGN & DEVELOPMENT</span>
           </div>
           <div className="hero-composition">
             <div className="hero-copy">
-              <h1 id="hero-title" aria-label="Anything but standard.">
+              <h1 id="hero-title" aria-label="Anything but ordinary.">
                 Anything
                 <br />
-                but <span>standard.</span>
+                but <span>ordinary.</span>
               </h1>
               <p>
-                Branding, websites, and digital products that make your
-                <br className="desktop-break" /> business easier to
-                understand—and harder to overlook.
+                Distinctive brands. Exceptional websites.
+                <br />
+                For businesses ready to stand apart.
               </p>
               <ContactButton className="pill-button">
                 Start a project
               </ContactButton>
             </div>
-            <div className="hero-art" aria-hidden="true">
-              <div className="art-orbit" />
-              <Image
-                className="knot"
-                src="/knot.svg"
-                alt=""
-                width={600}
-                height={580}
-                unoptimized
-                loading="eager"
-              />
-              <span className="art-cross cross-one">+</span>
-              <span className="art-cross cross-two">+</span>
-              <span className="art-caption">FIG. 01 — NO STANDARD FORM</span>
-            </div>
+            <Sculpture />
           </div>
           <div className="hero-bottom">
             <span className="availability">
-              <i className="status-dot" /> Projects from $2,000
+              <i className="status-dot" /> Independent studio. Worldwide.
             </span>
             <a href="#work">
               Explore our work <span className="circle-arrow">↓</span>
             </a>
-            <span className="hero-index">SCROLL TO EXPLORE / 01</span>
+            <span className="hero-index">DESIGN WITHOUT DEFAULTS</span>
           </div>
         </section>
         <div className="ticker" aria-hidden="true">
           <div>
             {Array.from({ length: 4 }, (_, i) => (
               <span key={i}>
-                STANDARD IS A STARTING POINT <b>✳</b> NOT A DESTINATION{" "}
+                IDEAS WITHOUT LIMITS <b>✳</b> BUILT WITHOUT SHORTCUTS{" "}
                 <b>✳</b>{" "}
               </span>
             ))}
@@ -149,13 +129,15 @@ export default function Home() {
             <span className="muted small-code">SELF-INITIATED CONCEPTS</span>
           </div>
           <div className="section-heading">
-            <h2 id="work-title" aria-label="Ideas in action.">
-              Ideas in action<span className="lime">.</span>
+            <h2 id="work-title" aria-label="A different point of view.">
+              A different
+              <br />
+              <em>point of view.</em>
             </h2>
             <p>
-              Three concepts exploring how strategy,
+              Brand, digital, and motion.
               <br />
-              design, and development work together.
+              Three self-initiated explorations.
             </p>
           </div>
           <div className="work-grid">
@@ -205,13 +187,13 @@ export default function Home() {
                   <span className="form-nav">
                     FORM & FIELD <span>OBJECTS FOR A LIFE WELL LIVED ↗</span>
                   </span>
-                  <div className="chair-art">
-                    <div className="chair-back" />
-                    <div className="chair-seat" />
-                    <div className="chair-leg leg-one" />
-                    <div className="chair-leg leg-two" />
-                    <div className="chair-shadow" />
-                  </div>
+                  <Image
+                    src="/images/form-field.webp"
+                    alt="Sculptural ash wood chair in a sunlit studio"
+                    fill
+                    sizes="(max-width: 760px) 100vw, 50vw"
+                    className="form-image"
+                  />
                   <div className="form-title">
                     Less, but
                     <br />
@@ -219,9 +201,6 @@ export default function Home() {
                   </div>
                   <span className="form-caption">
                     THE EVERYDAY COLLECTION — 001
-                  </span>
-                  <span className="form-badge">
-                    F<span>↗</span>
                   </span>
                 </div>
                 <span className="project-open" aria-hidden="true">
@@ -275,8 +254,8 @@ export default function Home() {
             </article>
           </div>
           <p className="concept-note">
-            <span>↳</span> Concept explorations, not client case studies. A look
-            at how we think and what we can build.
+            <span>↳</span> Self-initiated concepts. A look at our creative
+            range.
           </p>
         </section>
         <section
@@ -286,15 +265,15 @@ export default function Home() {
         >
           <div className="services-intro">
             <span className="eyebrow">02 / WHAT WE DO</span>
-            <h2 id="services-title" aria-label="What do you need to build?">
-              What do you
+            <h2 id="services-title" aria-label="From brand to browser.">
+              From brand
               <br />
-              <span className="lime">need to build?</span>
+              <span className="lime">to browser.</span>
             </h2>
             <p>
-              Choose one service or bring us the whole project.
+              One discipline or the whole vision.
               <br />
-              We connect strategy, design, technology, and words.
+              Every detail, connected.
             </p>
             <ContactButton className="text-link">
               Discuss your project
@@ -310,7 +289,6 @@ export default function Home() {
                   <span className="expand-icon" />
                 </summary>
                 <div className="service-content">
-                  <p className="service-note">{service.note}</p>
                   <p>{service.description}</p>
                   <div className="service-tags">
                     {service.tags.map((tag) => (
@@ -329,18 +307,18 @@ export default function Home() {
           <div className="wrap">
             <div className="contact-top">
               <span className="eyebrow">YOUR NEXT STEP</span>
-              <span>FROM $2,000 / BUILT AROUND YOUR BUSINESS.</span>
+              <span>CREATIVE THINKING. CONSIDERED EXECUTION.</span>
             </div>
             <h2 className="contact-big">
-              Have a project
+              Make your
               <br />
-              in mind?
+              next move.
             </h2>
             <div className="contact-bottom">
               <p>
-                Tell us what you’re building, what needs to change,
+                Bring the ambition.
                 <br />
-                and the budget you have in mind.
+                We’ll bring the team.
               </p>
               <ContactButton className="dark-pill">
                 Start a project

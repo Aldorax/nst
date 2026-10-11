@@ -60,14 +60,12 @@ export function PricingSelector() {
         <div className="investment-line" />
         <p className="investment-description">
           {funded
-            ? "Larger engagements are scoped around your product, team, and goals. Projects start at $2,000, with no fixed upper limit."
-            : "Startup projects range from $2,000 to $50,000. We shape the scope around your priorities and budget, from a single service to a complete launch."}
+            ? "Built for your next stage. Multi-disciplinary engagements with no fixed upper limit."
+            : "Focused on what moves you forward. From a single service to a complete launch."}
         </p>
-        <ul>
-          <li>Design, development, motion, and writing in one team</li>
-          <li>Scope and quote agreed before work begins</li>
-          <li>A clear process from direction to handover</li>
-        </ul>
+        <p className="investment-assurance">
+          A clear scope. A considered process. Direct access to the team.
+        </p>
         <ContactButton
           className="pill-button"
           stage={funded ? "Funded company" : "Startup"}
