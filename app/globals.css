@@ -373,6 +373,7 @@ h2 em {
   isolation: isolate;
 }
 .knot {
+  height: auto;
   width: 108%;
   max-width: 610px;
   position: relative;
