@@ -33,6 +33,67 @@ export function MotionExperience({ children }: { children: ReactNode }) {
     document.fonts.ready.then(() => {
       if (disposed) return;
       media.add("(prefers-reduced-motion: no-preference)", () => {
+        const chapters = [
+          "services",
+          "work",
+          "studio",
+          "process",
+          "pricing",
+          "contact",
+        ];
+        let previous = {
+          bg: "#090909",
+          ink: "#f5f5f2",
+          muted: "#aaaaaa",
+          line: "#444444",
+        };
+        chapters.forEach((id) => {
+          const light = ["work", "studio", "pricing"].includes(id);
+          const palette = light
+            ? {
+                bg: "#f5f5f2",
+                ink: "#111111",
+                muted: "#606060",
+                line: "#cccccc",
+              }
+            : {
+                bg: "#090909",
+                ink: "#f5f5f2",
+                muted: "#aaaaaa",
+                line: "#444444",
+              };
+          gsap.fromTo(
+            `#${id}`,
+            {
+              backgroundColor: previous.bg,
+              "--foreground": previous.ink,
+              "--muted": previous.muted,
+              "--accent-text": previous.ink,
+              "--scene-ink": previous.ink,
+              "--scene-muted": previous.muted,
+              "--scene-accent": previous.ink,
+              "--line": previous.line,
+            },
+            {
+              backgroundColor: palette.bg,
+              "--foreground": palette.ink,
+              "--muted": palette.muted,
+              "--accent-text": palette.ink,
+              "--scene-ink": palette.ink,
+              "--scene-muted": palette.muted,
+              "--scene-accent": palette.ink,
+              "--line": palette.line,
+              ease: "none",
+              scrollTrigger: {
+                trigger: `#${id}`,
+                start: "top 90%",
+                end: "top 15%",
+                scrub: 0.6,
+              },
+            },
+          );
+          previous = palette;
+        });
         gsap.to(".scroll-meter i", {
           scaleX: 1,
           ease: "none",
@@ -93,7 +154,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             );
           });
         gsap.fromTo(
-          ".form-image, .pulse-image",
+          ".field-backdrop, .sound-backdrop",
           { scale: 1.18, yPercent: -4 },
           {
             scale: 1,
@@ -223,7 +284,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               },
             });
           });
-        gsap.to(".orbit-shape", {
+        gsap.to(".orbit-credit", {
           y: -18,
           rotation: -14,
           duration: 4,
@@ -237,7 +298,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             toggleActions: "play pause resume pause",
           },
         });
-        gsap.to(".pulse-waves i", {
+        gsap.to(".sound-bars i", {
           scaleY: 0.55,
           duration: 1.8,
           stagger: { each: 0.09, repeat: -1, yoyo: true },

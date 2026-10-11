@@ -33,7 +33,7 @@ export function TeamSection() {
     <section className="team-section" id="studio" aria-labelledby="team-title">
       <div className="team-top wrap">
         <span className="eyebrow">
-          04 / A SMALL TEAM. A CONNECTED APPROACH.
+          03 / A SMALL TEAM. A CONNECTED APPROACH.
         </span>
         <span className="small-code">NST / NON STANDARD TEAM</span>
       </div>
@@ -147,7 +147,7 @@ export function TimelineSection() {
       aria-labelledby="timeline-title"
     >
       <div className="section-top">
-        <span className="eyebrow">03 / A CLEAR PATH TO LAUNCH</span>
+        <span className="eyebrow">04 / A CLEAR PATH TO LAUNCH</span>
         <span className="small-code muted">YOU’RE PART OF THE PROCESS.</span>
       </div>
       <div className="section-heading">

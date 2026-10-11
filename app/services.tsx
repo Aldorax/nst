@@ -71,7 +71,7 @@ export function ServicesShowcase() {
       aria-labelledby="services-title"
     >
       <div className="services-intro">
-        <span className="eyebrow">02 / DIFFERENT DISCIPLINES. ONE TEAM.</span>
+        <span className="eyebrow">01 / DIFFERENT DISCIPLINES. ONE TEAM.</span>
         <h2 id="services-title">
           Good ideas.
           <br />

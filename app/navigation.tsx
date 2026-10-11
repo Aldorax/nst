@@ -7,7 +7,6 @@ import { ContactButton } from "./ui";
 const links = [
   { label: "Work", target: "work" },
   { label: "Services", target: "services" },
-  { label: "Process", target: "process" },
   { label: "Studio", target: "studio" },
   { label: "Pricing", target: "pricing" },
 ];
@@ -184,11 +183,6 @@ export function SiteHeader() {
         <a className="wordmark" href="#" aria-label="NST home">
           <BrandLogo />
         </a>
-        <span className="brand-caption">
-          NON STANDARD
-          <br />
-          TEAM
-        </span>
         <nav className="desktop-nav" aria-label="Main navigation">
           {links.map((link) => (
             <a key={link.target} href={`#${link.target}`}>
@@ -196,11 +190,11 @@ export function SiteHeader() {
             </a>
           ))}
         </nav>
-        <ThemeToggle />
-        <ContactButton className="header-contact">
-          Start a project
-        </ContactButton>
-        <MobileMenu />
+        <div className="header-actions">
+          <ThemeToggle />
+          <ContactButton className="header-contact">Let’s talk</ContactButton>
+          <MobileMenu />
+        </div>
       </div>
     </header>
   );

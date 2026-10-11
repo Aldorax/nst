@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AsciiForm } from "./intro";
 
 const vertexSource = `attribute vec2 aPosition;
 void main(){gl_Position=vec4(aPosition,0.,1.);}`;
@@ -60,6 +61,7 @@ void main(){
 const forms = ["Liquid", "Orbit", "Bloom"];
 
 export function Sculpture() {
+  const [ascii, setAscii] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const targetMode = useRef(1);
   const [mode, setMode] = useState(1);
@@ -269,10 +271,14 @@ export function Sculpture() {
       className="sculpture"
       data-renderer={available ? "webgl" : "fallback"}
       data-form={mode}
+      data-display={ascii ? "ascii" : "chrome"}
     >
       <div className="sculpture-stage">
         <div className="sculpture-orbit" aria-hidden="true" />
         <div className="sculpture-fallback" aria-hidden="true" />
+        <div className="sculpture-ascii">
+          <AsciiForm paused={paused || !ascii} />
+        </div>
         <canvas
           ref={canvasRef}
           className="sculpture-canvas"
@@ -285,6 +291,30 @@ export function Sculpture() {
           Choose a form. Find a new perspective.
         </span>
       </div>
+      <div className="render-controls" role="group" aria-label="Render style">
+        <button
+          aria-pressed={!ascii}
+          onClick={() => {
+            setAscii(false);
+            pauseRef.current = paused;
+            redraw.current();
+          }}
+        >
+          Chrome
+        </button>
+        <button
+          aria-pressed={ascii}
+          onClick={() => {
+            setAscii(true);
+            setMode(1);
+            targetMode.current = 1;
+            pauseRef.current = true;
+            redraw.current();
+          }}
+        >
+          ASCII
+        </button>
+      </div>
       <div className="sculpture-controls">
         <div role="group" aria-label="Sculpture form">
           {forms.map((label, index) => (
@@ -292,6 +322,8 @@ export function Sculpture() {
               key={label}
               aria-pressed={mode === index}
               onClick={() => {
+                setAscii(false);
+                pauseRef.current = paused;
                 setMode(index);
                 targetMode.current = index;
                 redraw.current();
@@ -309,7 +341,7 @@ export function Sculpture() {
             paused ? "Play sculpture animation" : "Pause sculpture animation"
           }
           onClick={() => {
-            pauseRef.current = !paused;
+            pauseRef.current = ascii || !paused;
             setPaused(!paused);
             redraw.current();
           }}
