@@ -116,7 +116,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           delay: 0.12,
         });
         gsap.from(
-          ".hero-topline, .hero-copy > p, .hero-copy > button, .hero-bottom",
+          ".hero-topline, .hero-copy > p, .hero-copy > a, .hero-bottom",
           {
             y: 22,
             opacity: 0,
@@ -161,7 +161,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             yPercent: 4,
             ease: "none",
             scrollTrigger: {
-              trigger: ".project-form",
+              trigger: ".field-scene",
               start: "top bottom",
               end: "bottom top",
               scrub: 1,
@@ -220,28 +220,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             },
           );
         });
-        gsap.to(".investment-sculpture", {
-          rotation: 60,
-          scale: 1.1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#pricing",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-        gsap.to(".contact-emblem", {
-          rotation: 150,
-          scale: 1.3,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#contact",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.8,
-          },
-        });
         gsap.utils
           .toArray<HTMLElement>(".project-visual, .craft-card")
           .forEach((card) => {
@@ -292,7 +270,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           repeat: -1,
           ease: "sine.inOut",
           scrollTrigger: {
-            trigger: ".project-orbit",
+            trigger: ".orbit-scene",
             start: "top bottom",
             end: "bottom top",
             toggleActions: "play pause resume pause",
@@ -304,7 +282,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           stagger: { each: 0.09, repeat: -1, yoyo: true },
           ease: "sine.inOut",
           scrollTrigger: {
-            trigger: ".project-pulse",
+            trigger: ".sound-scene",
             start: "top bottom",
             end: "bottom top",
             toggleActions: "play pause resume pause",
@@ -321,6 +299,10 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           },
         });
         const onDisclosure = () => ScrollTrigger.refresh();
+        window.addEventListener("nst-gallery-change", onDisclosure);
+        cleanups.push(() =>
+          window.removeEventListener("nst-gallery-change", onDisclosure),
+        );
         document
           .querySelectorAll("details")
           .forEach((detail) => detail.addEventListener("toggle", onDisclosure));

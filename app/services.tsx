@@ -21,7 +21,7 @@ const disciplines = [
     description:
       "A distinctive identity. A clear position. A brand worth remembering.",
     tags: "STRATEGY / IDENTITY / ART DIRECTION",
-    symbol: "✳",
+    symbol: "n",
   },
   {
     name: "UI / UX design",

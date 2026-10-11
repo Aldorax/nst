@@ -151,7 +151,7 @@ export function StudioIntro() {
         </svg>
       </div>
       <div className="intro-footer">
-        <strong>nst✳</strong>
+        <strong>nst</strong>
         <span>CODE → FORM → POSSIBILITY</span>
       </div>
     </div>

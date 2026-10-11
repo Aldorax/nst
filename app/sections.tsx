@@ -5,7 +5,7 @@ import { PricingSelector } from "./pricing";
 const crafts = [
   {
     label: "Design & identity",
-    glyph: "✳",
+    glyph: "n",
     className: "craft-brand",
     note: "RECOGNISABLE BY DESIGN",
   },
@@ -90,52 +90,27 @@ export function TeamSection() {
 const phases = [
   {
     title: "Discovery & direction",
-    tag: "FIND THE DIFFERENCE",
     weeks: "WEEKS 1–2",
-    icon: "◎",
-    color: "amber",
-    start: 1,
-    end: 4,
     text: "Goals, audience, positioning, and a creative direction we believe in.",
   },
   {
     title: "Brand & interface design",
-    tag: "GIVE IT A FORM",
     weeks: "WEEKS 2–4",
-    icon: "✳",
-    color: "lime",
-    start: 2,
-    end: 6,
     text: "Brand exploration, wireframes, high-fidelity design, and a cohesive system.",
   },
   {
     title: "Development & motion",
-    tag: "BRING IT TO LIFE",
     weeks: "WEEKS 3–6",
-    icon: "⌘",
-    color: "cyan",
-    start: 3,
-    end: 8,
     text: "Thoughtful engineering, purposeful interactions, and content integration.",
   },
   {
     title: "Testing & refinement",
-    tag: "SWEAT THE DETAILS",
     weeks: "WEEKS 5–7",
-    icon: "✓",
-    color: "green",
-    start: 5,
-    end: 9,
     text: "Testing across devices, accessibility checks, and performance refinement.",
   },
   {
     title: "Launch & handover",
-    tag: "HELLO, WORLD",
     weeks: "WEEKS 7–8",
-    icon: "↗",
-    color: "violet",
-    start: 7,
-    end: 9,
     text: "A confident launch, documentation, and a clear handover to your team.",
   },
 ];
@@ -168,7 +143,7 @@ export function TimelineSection() {
             <i />
             <i />
             <i />
-            <b>✳</b>
+            <b>n</b>
           </div>
           <span className="small-code">A SHARED DIRECTION. EVERY STEP.</span>
         </div>
@@ -221,19 +196,7 @@ export function PricingSection() {
           All prices in USD. Each engagement is scoped individually.
         </p>
       </div>
-      <div className="pricing-composition">
-        <div className="investment-sculpture" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-          <span>
-            Great work.
-            <br />
-            Within reach.
-          </span>
-        </div>
-        <PricingSelector />
-      </div>
+      <PricingSelector />
     </section>
   );
 }

@@ -1,28 +1,16 @@
-import { PortfolioScene } from "./portfolio";
-import { StudioIntro, ReplayIntro } from "./intro";
+import { WorkGallery } from "./gallery";
+
 import { ServicesShowcase } from "./services";
 import { Sculpture } from "./sculpture";
-import { ArrowIcon } from "./icons";
-import { SiteHeader } from "./navigation";
-import { BrandLogo } from "./brand";
+
 import { organization } from "./site";
 import { MotionExperience } from "./motion";
 import { TeamSection, TimelineSection, PricingSection } from "./sections";
-import {
-  ProjectButton,
-  ProjectDialog,
-  ContactButton,
-  ContactDialog,
-} from "./ui";
+import { ContactButton } from "./ui";
 
 export default function Home() {
   return (
     <MotionExperience>
-      <a className="skip-link" href="#main">
-        Skip to content
-      </a>
-      <StudioIntro />
-      <SiteHeader />
       <main id="main">
         <section className="hero wrap" aria-labelledby="hero-title">
           <div className="hero-topline">
@@ -63,8 +51,8 @@ export default function Home() {
           <div>
             {Array.from({ length: 4 }, (_, i) => (
               <span key={i}>
-                IDEAS WITHOUT LIMITS <b>✳</b> BUILT WITHOUT SHORTCUTS{" "}
-                <b>✳</b>{" "}
+                IDEAS WITHOUT LIMITS <b>/</b> BUILT WITHOUT SHORTCUTS{" "}
+                <b>/</b>{" "}
               </span>
             ))}
           </div>
@@ -91,69 +79,9 @@ export default function Home() {
               Three self-initiated explorations.
             </p>
           </div>
-          <div className="work-grid">
-            <article className="project project-orbit">
-              <ProjectButton project="orbit" className="project-visual">
-                <PortfolioScene project="orbit" />
-                <span className="project-open" aria-hidden="true">
-                  <ArrowIcon />
-                </span>
-              </ProjectButton>
-              <div className="project-caption">
-                <div>
-                  <span className="project-type">CONCEPT EXPLORATION</span>
-                  <h3>Orbit</h3>
-                  <p>Fintech, with a fresh perspective.</p>
-                </div>
-                <span>BRANDING / WEB DESIGN</span>
-                <ProjectButton project="orbit" className="project-story-link">
-                  Explore the concept <ArrowIcon />
-                </ProjectButton>
-              </div>
-            </article>
-            <article className="project project-form">
-              <ProjectButton project="form" className="project-visual">
-                <PortfolioScene project="form" />
-                <span className="project-open" aria-hidden="true">
-                  <ArrowIcon />
-                </span>
-              </ProjectButton>
-              <div className="project-caption">
-                <div>
-                  <span className="project-type">CONCEPT EXPLORATION</span>
-                  <h3>Form & Field</h3>
-                  <p>A digital home for considered living.</p>
-                </div>
-                <span>STRATEGY / E-COMMERCE</span>
-                <ProjectButton project="form" className="project-story-link">
-                  Explore the concept <ArrowIcon />
-                </ProjectButton>
-              </div>
-            </article>
-            <article className="project project-pulse">
-              <ProjectButton project="pulse" className="project-visual">
-                <PortfolioScene project="pulse" />
-                <span className="project-open" aria-hidden="true">
-                  <ArrowIcon />
-                </span>
-              </ProjectButton>
-              <div className="project-caption">
-                <div>
-                  <span className="project-type">CONCEPT EXPLORATION</span>
-                  <h3>Pulse</h3>
-                  <p>An identity that moves to its own beat.</p>
-                </div>
-                <span>IDENTITY / MOTION</span>
-                <ProjectButton project="pulse" className="project-story-link">
-                  Explore the concept <ArrowIcon />
-                </ProjectButton>
-              </div>
-            </article>
+          <div className="home-gallery">
+            <WorkGallery />
           </div>
-          <p className="concept-note">
-            <span>↳</span> Self-initiated concepts. A look at our creative
-            range.
-          </p>
         </section>
         <TeamSection />
         <TimelineSection />
@@ -164,9 +92,7 @@ export default function Home() {
               <span className="eyebrow">YOUR NEXT STEP</span>
               <span>CREATIVE THINKING. CONSIDERED EXECUTION.</span>
             </div>
-            <div className="contact-emblem" aria-hidden="true">
-              ✳
-            </div>
+
             <h2 className="contact-big">
               Make your
               <br />
@@ -185,33 +111,12 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="site-footer wrap">
-        <div className="footer-display" aria-hidden="true">
-          non standard<span>✳</span>
-        </div>
-        <a href="#" className="wordmark">
-          <BrandLogo />
-        </a>
-        <span className="footer-manifesto">
-          NON STANDARD TEAM.
-          <br />
-          STANDARD WAS NEVER THE PLAN.
-        </span>
-        <a className="footer-email" href="mailto:legadax@outlook.com">
-          legadax@outlook.com ↗
-        </a>
-        <span>© 2026 NST</span>
-        <a href="#main">Back to top ↑</a>
-        <ReplayIntro />
-      </footer>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
         }}
       />
-      <ProjectDialog />
-      <ContactDialog />
     </MotionExperience>
   );
 }

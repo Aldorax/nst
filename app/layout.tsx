@@ -1,4 +1,9 @@
 import Script from "next/script";
+import { Suspense } from "react";
+import { SiteHeader } from "./navigation";
+import { SiteFooter } from "./shared";
+import { StudioIntro } from "./intro";
+import { PageTransition, PageEntrance } from "./transitions";
 import { siteUrl, siteDescription } from "./site";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -56,6 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
       data-theme="dark"
       suppressHydrationWarning
@@ -65,7 +71,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           id="nst-theme-init"
           strategy="beforeInteractive"
         >{`try{var theme=localStorage.getItem('nst-theme');document.documentElement.dataset.theme=theme==='light'?'light':'dark';}catch(e){}`}</Script>
-        {children}
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <StudioIntro />
+        <Suspense fallback={<div className="header-placeholder" />}>
+          <SiteHeader />
+        </Suspense>
+        <Suspense fallback={children}>
+          <PageEntrance>{children}</PageEntrance>
+        </Suspense>
+        <SiteFooter />
+        <Suspense fallback={null}>
+          <PageTransition />
+        </Suspense>
       </body>
     </html>
   );

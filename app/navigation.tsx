@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./brand";
 import { CloseIcon } from "./icons";
+import { TransitionLink } from "./transitions";
+import { usePathname } from "next/navigation";
 import { ContactButton } from "./ui";
 
 const links = [
@@ -72,13 +74,7 @@ export function ThemeToggle() {
 function MobileMenu() {
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("main");
-  useEffect(() => {
-    const sync = () => setActive(window.location.hash.slice(1) || "main");
-    sync();
-    window.addEventListener("hashchange", sync);
-    return () => window.removeEventListener("hashchange", sync);
-  }, []);
+  const active = usePathname().split("/")[1] || "main";
   const menuLinks = [
     { label: "Home", target: "main" },
     { label: "Work", target: "work" },
@@ -125,14 +121,14 @@ function MobileMenu() {
         }}
       >
         <div className="menu-heading">
-          <a
+          <TransitionLink
             className="wordmark"
-            href="#"
+            href="/"
             aria-label="NST home"
             onClick={() => dialog.current?.close()}
           >
             <BrandLogo />
-          </a>
+          </TransitionLink>
           <div>
             <button
               autoFocus
@@ -147,26 +143,24 @@ function MobileMenu() {
         </div>
         <nav aria-label="Mobile navigation">
           {menuLinks.map((link, i) => (
-            <a
+            <TransitionLink
               key={link.target}
-              href={`#${link.target}`}
+              href={link.target === "main" ? "/" : `/${link.target}`}
               aria-current={active === link.target ? "location" : undefined}
               onClick={() => dialog.current?.close()}
             >
               <span className="menu-link-label">{link.label}</span>
               <span className="menu-number">0{i + 1}</span>
-            </a>
+            </TransitionLink>
           ))}
-          <button
+          <TransitionLink
+            href="/contact"
             className="menu-contact"
-            onClick={() => {
-              dialog.current?.close();
-              window.dispatchEvent(new Event("nst-contact"));
-            }}
+            onClick={() => dialog.current?.close()}
           >
             <span className="menu-link-label">Contact</span>
             <span className="menu-number">06</span>
-          </button>
+          </TransitionLink>
         </nav>
         <div className="menu-footer">
           <a href="mailto:legadax@outlook.com">legadax@outlook.com</a>
@@ -177,17 +171,24 @@ function MobileMenu() {
   );
 }
 export function SiteHeader() {
+  const pathname = usePathname();
   return (
     <header className="header-shell">
       <div className="site-header wrap">
-        <a className="wordmark" href="#" aria-label="NST home">
+        <TransitionLink className="wordmark" href="/" aria-label="NST home">
           <BrandLogo />
-        </a>
+        </TransitionLink>
         <nav className="desktop-nav" aria-label="Main navigation">
           {links.map((link) => (
-            <a key={link.target} href={`#${link.target}`}>
+            <TransitionLink
+              key={link.target}
+              aria-current={
+                pathname.startsWith(`/${link.target}`) ? "page" : undefined
+              }
+              href={`/${link.target}`}
+            >
               {link.label}
-            </a>
+            </TransitionLink>
           ))}
         </nav>
         <div className="header-actions">
