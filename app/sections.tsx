@@ -37,7 +37,7 @@ export function TeamSection() {
         </span>
         <span className="small-code">NST / NON STANDARD TEAM</span>
       </div>
-      <div className="team-canvas wrap">
+      <div className="team-canvas team-gallery wrap">
         {crafts.map((craft, i) => (
           <div
             className={`craft-card ${craft.className}`}
@@ -161,34 +161,27 @@ export function TimelineSection() {
           <br />A shared vision from day one.
         </p>
       </div>
-      <div className="timeline-scroll">
-        <div className="timeline-weeks">
-          {Array.from({ length: 8 }, (_, i) => (
-            <span key={i}>{i === 0 ? "KICK-OFF" : `WEEK 0${i + 1}`}</span>
-          ))}
+      <div className="process-layout">
+        <div className="process-graphic" aria-hidden="true">
+          <span className="process-counter">01—05</span>
+          <div className="process-orbits">
+            <i />
+            <i />
+            <i />
+            <b>✳</b>
+          </div>
+          <span className="small-code">A SHARED DIRECTION. EVERY STEP.</span>
         </div>
-        <div className="timeline-board">
+        <div className="process-steps">
           {phases.map((phase, i) => (
-            <details
-              key={phase.title}
-              className={`timeline-phase phase-${phase.color}`}
-              style={{
-                gridColumn: `${phase.start} / ${phase.end}`,
-                gridRow: i + 1,
-              }}
-            >
+            <details key={phase.title} className="process-step" open={i === 0}>
               <summary>
-                <div className="phase-meta">
-                  <i />
-                  <span>{phase.tag}</span>
-                  <b>{phase.weeks}</b>
-                  <i />
-                </div>
-                <div className="phase-title">
-                  <span className="phase-icon">{phase.icon}</span>
+                <span className="step-number">0{i + 1}</span>
+                <div>
+                  <span className="small-code">{phase.weeks}</span>
                   <h3>{phase.title}</h3>
-                  <span className="phase-expand">+</span>
                 </div>
+                <span className="step-plus">+</span>
               </summary>
               <p>{phase.text}</p>
             </details>
@@ -228,7 +221,19 @@ export function PricingSection() {
           All prices in USD. Each engagement is scoped individually.
         </p>
       </div>
-      <PricingSelector />
+      <div className="pricing-composition">
+        <div className="investment-sculpture" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <span>
+            Great work.
+            <br />
+            Within reach.
+          </span>
+        </div>
+        <PricingSelector />
+      </div>
     </section>
   );
 }

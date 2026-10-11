@@ -13,6 +13,23 @@ export function MotionExperience({ children }: { children: ReactNode }) {
     let disposed = false;
     const media = gsap.matchMedia();
     const cleanups: (() => void)[] = [];
+    const scenes = document.querySelectorAll<HTMLElement>("main > section");
+    let sceneFrame = 0;
+    const updateScene = () => {
+      sceneFrame = 0;
+      const current = Array.from(scenes).find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= 130 && rect.bottom > 130;
+      });
+      if (current)
+        document.documentElement.dataset.chapter = current.id || "hero";
+    };
+    const queueScene = () => {
+      if (!sceneFrame) sceneFrame = requestAnimationFrame(updateScene);
+    };
+    window.addEventListener("scroll", queueScene, { passive: true });
+    window.addEventListener("resize", queueScene);
+    updateScene();
     document.fonts.ready.then(() => {
       if (disposed) return;
       media.add("(prefers-reduced-motion: no-preference)", () => {
@@ -55,89 +72,140 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           ease: "power3.out",
           delay: 0.2,
         });
+        // Each scene responds to scroll in its own way, without pinning the page.
         gsap.utils
-          .toArray<HTMLElement>(
-            ".section-heading h2, .services-intro h2, .team-center h2, .pricing-intro h2",
-          )
-          .forEach((title) => {
-            const split = SplitText.create(title, {
-              type: "words,chars",
-              mask: "words",
-              aria: "none",
-            });
-            splits.push(split);
-            gsap.from(split.chars, {
-              yPercent: 105,
-              opacity: 0,
-              rotate: 4,
-              duration: 0.8,
-              stagger: 0.018,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: title,
-                start: "top 88%",
-                toggleActions: "play none none none",
+          .toArray<HTMLElement>(".project-visual")
+          .forEach((visual, i) => {
+            gsap.fromTo(
+              visual,
+              { borderRadius: "70px", rotation: i === 1 ? -3 : 2 },
+              {
+                borderRadius: "12px",
+                rotation: 0,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: visual,
+                  start: "top 95%",
+                  end: "top 35%",
+                  scrub: 1,
+                },
               },
-            });
+            );
           });
-        gsap.utils
-          .toArray<HTMLElement>(
-            ".section-top, .project-caption, .concept-note, .services-list details, .team-center > p, .team-center > button, .pricing-panel",
-          )
-          .forEach((element) =>
-            gsap.from(element, {
-              y: 35,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: element,
-                start: "top 93%",
-                toggleActions: "play none none none",
-              },
-            }),
-          );
-        gsap.utils.toArray<HTMLElement>(".project-visual").forEach((element) =>
-          gsap.from(element, {
-            y: 65,
-            scale: 0.95,
-            clipPath: "inset(12% 0 12% 0)",
-            duration: 1.1,
-            ease: "power3.out",
+        gsap.fromTo(
+          ".form-image, .pulse-image",
+          { scale: 1.18, yPercent: -4 },
+          {
+            scale: 1,
+            yPercent: 4,
+            ease: "none",
             scrollTrigger: {
-              trigger: element,
-              start: "top 92%",
-              toggleActions: "play none none none",
+              trigger: ".project-form",
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
             },
-          }),
+          },
         );
-        gsap.utils.toArray<HTMLElement>(".craft-card").forEach((card, i) => {
-          gsap.from(card, {
-            y: 80,
-            rotation: i % 2 ? 9 : -9,
-            opacity: 0,
-            duration: 1,
-            delay: i * 0.055,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: ".team-section",
-              start: "top 85%",
-              toggleActions: "play none none none",
+        gsap.to(".discipline-object", {
+          rotation: 35,
+          scale: 1.12,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#services",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".process-orbits", {
+          rotation: 120,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#process",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+        gsap.utils.toArray<HTMLElement>(".process-step").forEach((step, i) => {
+          ScrollTrigger.create({
+            trigger: step,
+            start: "top 65%",
+            end: "bottom 35%",
+            onToggle: ({ isActive }) => {
+              step.classList.toggle("is-current", isActive);
+              if (isActive) {
+                const counter = document.querySelector(".process-counter");
+                if (counter) counter.textContent = `0${i + 1}—05`;
+              }
             },
           });
-          if (window.matchMedia("(min-width: 900px)").matches) {
-            gsap.to(card, {
-              y: Number(card.dataset.speed) * 45,
+        });
+        gsap.utils.toArray<HTMLElement>(".craft-card").forEach((card, i) => {
+          gsap.fromTo(
+            card,
+            { rotation: (i % 2 ? 1 : -1) * 8, y: i % 2 ? 25 : -25 },
+            {
+              rotation: (i % 2 ? -1 : 1) * 3,
+              y: 0,
               ease: "none",
               scrollTrigger: {
-                trigger: ".team-section",
+                trigger: ".team-gallery",
                 start: "top bottom",
-                end: "bottom top",
-                scrub: 1.3,
+                end: "bottom center",
+                scrub: 1,
               },
-            });
-          }
+            },
+          );
         });
+        gsap.to(".investment-sculpture", {
+          rotation: 60,
+          scale: 1.1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#pricing",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(".contact-emblem", {
+          rotation: 150,
+          scale: 1.3,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#contact",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.8,
+          },
+        });
+        gsap.utils
+          .toArray<HTMLElement>(".project-visual, .craft-card")
+          .forEach((card) => {
+            const move = (event: PointerEvent) => {
+              if (event.pointerType !== "mouse") return;
+              const rect = card.getBoundingClientRect();
+              gsap.to(card, {
+                rotationY: ((event.clientX - rect.left) / rect.width - 0.5) * 6,
+                rotationX:
+                  -((event.clientY - rect.top) / rect.height - 0.5) * 6,
+                transformPerspective: 1200,
+                duration: 0.6,
+                overwrite: "auto",
+              });
+            };
+            const leave = () => {
+              gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.6 });
+            };
+            card.addEventListener("pointermove", move);
+            card.addEventListener("pointerleave", leave);
+            cleanups.push(() => {
+              card.removeEventListener("pointermove", move);
+              card.removeEventListener("pointerleave", leave);
+            });
+          });
         gsap.utils
           .toArray<SVGPathElement>(".craft-mark path")
           .forEach((path, i) => {
@@ -181,32 +249,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             toggleActions: "play pause resume pause",
           },
         });
-        gsap.utils.toArray<HTMLElement>(".timeline-phase").forEach((phase, i) =>
-          gsap.from(phase, {
-            x: -65,
-            opacity: 0,
-            duration: 0.9,
-            delay: i * 0.08,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: phase,
-              start: "top 92%",
-              toggleActions: "play none none none",
-            },
-          }),
-        );
-        gsap.from(".contact-big", {
-          y: 70,
-          opacity: 0,
-          rotate: -3,
-          duration: 1.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".contact-section",
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        });
         gsap.to(".ticker > div", {
           xPercent: -12,
           ease: "none",
@@ -237,6 +279,10 @@ export function MotionExperience({ children }: { children: ReactNode }) {
     });
     return () => {
       disposed = true;
+      window.removeEventListener("scroll", queueScene);
+      window.removeEventListener("resize", queueScene);
+      cancelAnimationFrame(sceneFrame);
+      delete document.documentElement.dataset.chapter;
       media.revert();
     };
   }, []);

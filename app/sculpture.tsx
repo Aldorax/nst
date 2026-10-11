@@ -186,7 +186,10 @@ export function Sculpture() {
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
       const mobile = window.innerWidth < 760;
-      const dpr = Math.min(Math.max(window.devicePixelRatio, 1.5), mobile ? 1.5 : 2);
+      const dpr = Math.min(
+        Math.max(window.devicePixelRatio, 1.5),
+        mobile ? 1.5 : 2,
+      );
       canvas.width = Math.max(
         1,
         Math.round(Math.min(rect.width * dpr, mobile ? 720 : 1500)),

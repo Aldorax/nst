@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ServicesShowcase } from "./services";
 import { Sculpture } from "./sculpture";
 import { ArrowIcon } from "./icons";
 import { SiteHeader } from "./navigation";
@@ -12,59 +13,6 @@ import {
   ContactButton,
   ContactDialog,
 } from "./ui";
-
-const services = [
-  {
-    name: "Website development",
-    description:
-      "Fast, expressive websites and applications. Built to perform and easy to manage.",
-    tags: [
-      "Creative development",
-      "Web applications",
-      "CMS & e-commerce",
-      "Performance & SEO",
-    ],
-  },
-  {
-    name: "Branding & identity",
-    description:
-      "Positioning, identity, and design systems that make your business unmistakable.",
-    tags: [
-      "Brand strategy",
-      "Visual identity",
-      "Art direction",
-      "Brand guidelines",
-    ],
-  },
-  {
-    name: "UI / UX design",
-    description:
-      "Intuitive products. Considered journeys. Interfaces people want to use.",
-    tags: ["User research", "Product design", "Prototyping", "Design systems"],
-  },
-  {
-    name: "Motion & video",
-    description:
-      "Brand animation, product films, and explainers that turn attention into understanding.",
-    tags: [
-      "Brand animation",
-      "Explainer videos",
-      "Product films",
-      "Motion systems",
-    ],
-  },
-  {
-    name: "Copy & technical writing",
-    description:
-      "A clear voice for your brand. Useful words for your customers and developers.",
-    tags: [
-      "Website copy",
-      "Brand voice",
-      "Developer docs",
-      "Technical content",
-    ],
-  },
-];
 
 export default function Home() {
   return (
@@ -179,6 +127,9 @@ export default function Home() {
                   <p>Fintech, with a fresh perspective.</p>
                 </div>
                 <span>BRANDING / WEB DESIGN</span>
+                <ProjectButton project="orbit" className="project-story-link">
+                  Explore the concept <ArrowIcon />
+                </ProjectButton>
               </div>
             </article>
             <article className="project project-form">
@@ -214,11 +165,21 @@ export default function Home() {
                   <p>A digital home for considered living.</p>
                 </div>
                 <span>STRATEGY / E-COMMERCE</span>
+                <ProjectButton project="form" className="project-story-link">
+                  Explore the concept <ArrowIcon />
+                </ProjectButton>
               </div>
             </article>
             <article className="project project-pulse">
               <ProjectButton project="pulse" className="project-visual">
                 <div className="pulse-poster">
+                  <Image
+                    src="/images/pulse.webp"
+                    alt="Orange headphones with chrome detailing in an orange studio"
+                    fill
+                    sizes="(max-width: 760px) 100vw, 70vw"
+                    className="pulse-image"
+                  />
                   <span className="pulse-nav">
                     PULSE® <span>TURN IT UP. FEEL SOMETHING.</span>
                   </span>
@@ -250,6 +211,9 @@ export default function Home() {
                   <p>An identity that moves to its own beat.</p>
                 </div>
                 <span>IDENTITY / MOTION</span>
+                <ProjectButton project="pulse" className="project-story-link">
+                  Explore the concept <ArrowIcon />
+                </ProjectButton>
               </div>
             </article>
           </div>
@@ -258,48 +222,7 @@ export default function Home() {
             range.
           </p>
         </section>
-        <section
-          className="services-section wrap"
-          id="services"
-          aria-labelledby="services-title"
-        >
-          <div className="services-intro">
-            <span className="eyebrow">02 / WHAT WE DO</span>
-            <h2 id="services-title" aria-label="From brand to browser.">
-              From brand
-              <br />
-              <span className="lime">to browser.</span>
-            </h2>
-            <p>
-              One discipline or the whole vision.
-              <br />
-              Every detail, connected.
-            </p>
-            <ContactButton className="text-link">
-              Discuss your project
-            </ContactButton>
-          </div>
-          <div className="services-list">
-            {services.map((service, i) => (
-              <details key={service.name} name="services" open={i === 0}>
-                <summary>
-                  <span className="service-number">0{i + 1}</span>
-                  <h3>{service.name}</h3>
-                  <span className="service-starting">FROM $2,000</span>
-                  <span className="expand-icon" />
-                </summary>
-                <div className="service-content">
-                  <p>{service.description}</p>
-                  <div className="service-tags">
-                    {service.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </details>
-            ))}
-          </div>
-        </section>
+        <ServicesShowcase />
         <TimelineSection />
         <TeamSection />
         <PricingSection />
@@ -308,6 +231,9 @@ export default function Home() {
             <div className="contact-top">
               <span className="eyebrow">YOUR NEXT STEP</span>
               <span>CREATIVE THINKING. CONSIDERED EXECUTION.</span>
+            </div>
+            <div className="contact-emblem" aria-hidden="true">
+              ✳
             </div>
             <h2 className="contact-big">
               Make your
@@ -328,6 +254,9 @@ export default function Home() {
         </section>
       </main>
       <footer className="site-footer wrap">
+        <div className="footer-display" aria-hidden="true">
+          non standard<span>✳</span>
+        </div>
         <a href="#" className="wordmark">
           <BrandLogo />
         </a>
