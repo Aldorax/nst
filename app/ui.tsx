@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowIcon, CloseIcon } from "./icons";
 import {
   useEffect,
   useRef,
@@ -37,16 +38,23 @@ type Project = keyof typeof projectDetails;
 export function ContactButton({
   children,
   className,
+  stage,
 }: {
   children: ReactNode;
   className?: string;
+  stage?: "Startup" | "Funded company";
 }) {
   return (
     <button
       className={className}
-      onClick={() => window.dispatchEvent(new Event("nst-contact"))}
+      onClick={() =>
+        window.dispatchEvent(
+          new CustomEvent("nst-contact", { detail: { stage } }),
+        )
+      }
     >
-      {children}
+      <span className="button-label">{children}</span>
+      <ArrowIcon />
     </button>
   );
 }
@@ -100,7 +108,7 @@ export function ProjectDialog() {
         onClick={() => dialog.current?.close()}
         aria-label="Close project"
       >
-        ×
+        <CloseIcon />
       </button>
       <span className="eyebrow">SELF-INITIATED CONCEPT / {item.category}</span>
       <h2 id="project-dialog-title">
@@ -119,7 +127,7 @@ export function ProjectDialog() {
           window.dispatchEvent(new Event("nst-contact"));
         }}
       >
-        Build something like this <span>↗</span>
+        Discuss a similar project <ArrowIcon />
       </button>
     </dialog>
   );
@@ -128,8 +136,26 @@ export function ContactDialog() {
   const dialog = useRef<HTMLDialogElement>(null);
   const [brief, setBrief] = useState("");
   const [copied, setCopied] = useState(false);
+  const [companyStage, setCompanyStage] = useState("Startup");
+  const [budget, setBudget] = useState("Let’s discuss");
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    project: "",
+    service: "Website development",
+  });
   useEffect(() => {
-    const open = () => {
+    const open = (event: Event) => {
+      setCompanyStage(
+        (event as CustomEvent<{ stage?: string }>).detail?.stage || "Startup",
+      );
+      setBudget("Let’s discuss");
+      setFormValues({
+        name: "",
+        email: "",
+        project: "",
+        service: "Website development",
+      });
       setBrief("");
       setCopied(false);
       dialog.current?.showModal();
@@ -140,6 +166,12 @@ export function ContactDialog() {
   function prepareBrief(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    setFormValues({
+      name: String(data.get("name") || ""),
+      email: String(data.get("email") || ""),
+      project: String(data.get("project") || ""),
+      service: String(data.get("service") || ""),
+    });
     const result = `NST — Project brief\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nService: ${data.get("service")}\nBudget: ${data.get("budget")}\nCompany stage: ${data.get("stage")}\n\nProject:\n${data.get("project")}\n`;
     setBrief(result);
   }
@@ -165,12 +197,11 @@ export function ContactDialog() {
         onClick={() => dialog.current?.close()}
         aria-label="Close enquiry"
       >
-        ×
+        <CloseIcon />
       </button>
-      <span className="eyebrow">THE FIRST STEP TO SOMETHING DIFFERENT</span>
+      <span className="eyebrow">START A PROJECT / FROM $2,000</span>
       <h2 id="contact-dialog-title">
-        {brief ? "Great things start here." : "What’s on your mind?"}
-        <span className="lime">↗</span>
+        {brief ? "Your email draft is ready." : "Tell us about your project."}
       </h2>
       {brief ? (
         <div aria-live="polite">
@@ -184,10 +215,10 @@ export function ContactDialog() {
               className="pill-button"
               href={`mailto:legadax@outlook.com?subject=${encodeURIComponent("New project enquiry — NST")}&body=${encodeURIComponent(brief)}`}
             >
-              Open email draft <span>↗</span>
+              Open email draft <ArrowIcon />
             </a>
             <button className="pill-button" onClick={downloadBrief}>
-              Download brief <span>↓</span>
+              Download details <ArrowIcon direction="down" />
             </button>
             <button
               className="text-link"
@@ -200,22 +231,25 @@ export function ContactDialog() {
                 }
               }}
             >
-              {copied ? "Copied ✓" : "Copy brief ↗"}
+              {copied ? "Copied ✓" : "Copy details"}
             </button>
           </div>
           <button className="text-link" onClick={() => setBrief("")}>
-            Start another brief
+            Edit enquiry
           </button>
         </div>
       ) : (
         <form onSubmit={prepareBrief}>
-          <p>A few details to get the conversation started.</p>
+          <p>
+            A few details to help us understand your business and what you need.
+          </p>
           <div className="form-row">
             <label>
               Your name
               <input
                 autoFocus
                 name="name"
+                defaultValue={formValues.name}
                 placeholder="Alex Taylor"
                 autoComplete="name"
                 required
@@ -227,6 +261,7 @@ export function ContactDialog() {
               <input
                 type="email"
                 name="email"
+                defaultValue={formValues.email}
                 placeholder="alex@company.com"
                 autoComplete="email"
                 required
@@ -234,92 +269,69 @@ export function ContactDialog() {
               />
             </label>
           </div>
+          <label>
+            Company stage
+            <select
+              name="stage"
+              value={companyStage}
+              onChange={(event) => {
+                setCompanyStage(event.target.value);
+                setBudget("Let’s discuss");
+              }}
+            >
+              <option>Startup</option>
+              <option>Funded company</option>
+            </select>
+          </label>
           <div className="form-row">
             <label>
               What do you need?
-              <select name="service">
+              <select name="service" defaultValue={formValues.service}>
                 <option>Website development</option>
                 <option>Branding & identity</option>
                 <option>UI / UX design</option>
                 <option>Motion & video</option>
                 <option>Copy & technical writing</option>
-                <option>A bit of everything</option>
+                <option>Multiple services / help defining the scope</option>
               </select>
             </label>
             <label>
               Budget range
-              <select name="budget">
+              <select
+                name="budget"
+                value={budget}
+                onChange={(event) => setBudget(event.target.value)}
+              >
                 <option>Let’s discuss</option>
                 <option>$2,000–$5,000</option>
                 <option>$5,000–$15,000</option>
                 <option>$15,000–$30,000</option>
                 <option>$30,000–$50,000</option>
-                <option>$50,000+ (funded companies)</option>
+                {companyStage === "Funded company" && <option>$50,000+</option>}
               </select>
             </label>
           </div>
+
           <label>
-            Company stage
-            <select name="stage">
-              <option>Startup</option>
-              <option>Funded company</option>
-            </select>
-          </label>
-          <label>
-            Tell us about your idea
+            What are you building?
             <textarea
               name="project"
-              placeholder="What are you making, and what would you like to do differently?"
+              defaultValue={formValues.project}
+              placeholder="What does your business do? What do you need help with, and when would you like to launch?"
               required
               rows={4}
               maxLength={5000}
             />
           </label>
           <button className="pill-button" type="submit">
-            Create enquiry <span>↗</span>
+            Prepare email draft <ArrowIcon />
           </button>
           <p className="form-footnote">
-            We’ll prepare an email draft for you to review and send.
+            You’ll review and send the draft from your email app. Preparing it
+            does not send your enquiry.
           </p>
         </form>
       )}
     </dialog>
-  );
-}
-export function MobileMenu() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="mobile-menu">
-      <button
-        className="menu-toggle"
-        aria-expanded={open}
-        aria-controls="mobile-navigation"
-        aria-label={open ? "Close menu" : "Open menu"}
-        onClick={() => setOpen(!open)}
-      >
-        {open ? "×" : "☰"}
-      </button>
-      {open && (
-        <nav id="mobile-navigation" aria-label="Mobile navigation">
-          {["Work", "Services", "Studio", "Pricing"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setOpen(false)}
-            >
-              {item} ↗
-            </a>
-          ))}
-          <button
-            onClick={() => {
-              setOpen(false);
-              window.dispatchEvent(new Event("nst-contact"));
-            }}
-          >
-            Let’s talk ↗
-          </button>
-        </nav>
-      )}
-    </div>
   );
 }

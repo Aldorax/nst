@@ -20,7 +20,7 @@ export function PricingSelector() {
             }
           }}
         >
-          Startups <span>↗</span>
+          Startups
         </button>
         <button
           role="tab"
@@ -36,7 +36,7 @@ export function PricingSelector() {
             }
           }}
         >
-          Funded companies <span>↗</span>
+          Funded companies
         </button>
       </div>
       <div
@@ -46,38 +46,36 @@ export function PricingSelector() {
         aria-labelledby={funded ? "funded-tab" : "startup-tab"}
       >
         <span className="eyebrow">
-          {funded
-            ? "BUILT FOR YOUR NEXT CHAPTER"
-            : "A STRONG START. ROOM TO GROW."}
+          {funded ? "FOR FUNDED COMPANIES" : "FOR SELF-FUNDED STARTUPS"}
         </span>
         <div className="investment-price" key={funded ? "funded" : "startup"}>
           <span>FROM</span>
           <strong>$2,000</strong>
           <p>
             {funded
-              ? "No upper limit. Just the right scope."
-              : "Up to $50,000. Ambition, within reach."}
+              ? "No fixed upper budget limit."
+              : "Startup projects capped at $50,000."}
           </p>
         </div>
         <div className="investment-line" />
         <p className="investment-description">
           {funded
-            ? "An established product. A bigger vision. A new market. We bring the team and the craft your next chapter needs, with an investment shaped around your goals."
-            : "From your first identity to a complete digital launch. We’ll find the most valuable way to move your business forward, within a clear project budget."}
+            ? "Larger engagements are scoped around your product, team, and goals. Projects start at $2,000, with no fixed upper limit."
+            : "Startup projects range from $2,000 to $50,000. We shape the scope around your priorities and budget, from a single service to a complete launch."}
         </p>
         <ul>
-          <li>One team across design, code, motion & words</li>
-          <li>A scope and quote before we start</li>
-          <li>Collaboration from first idea to launch</li>
+          <li>Design, development, motion, and writing in one team</li>
+          <li>Scope and quote agreed before work begins</li>
+          <li>A clear process from direction to handover</li>
         </ul>
-        <ContactButton className="pill-button">
-          {funded
-            ? "Let’s shape your next chapter"
-            : "Let’s find your starting point"}
-          <span>↗</span>
+        <ContactButton
+          className="pill-button"
+          stage={funded ? "Funded company" : "Startup"}
+        >
+          Start a project
         </ContactButton>
         <span className="investment-note">
-          PROJECT PRICING · NO ONE-SIZE-FITS-ALL PACKAGES
+          ALL PRICES IN USD / PROJECTS SCOPED INDIVIDUALLY
         </span>
       </div>
     </div>

@@ -31,6 +31,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
         const hero = SplitText.create("#hero-title", {
           type: "chars,words",
           mask: "words",
+          aria: "none",
         });
         splits.push(hero);
         gsap.from(hero.chars, {
@@ -80,6 +81,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             const split = SplitText.create(title, {
               type: "words,chars",
               mask: "words",
+              aria: "none",
             });
             splits.push(split);
             gsap.from(split.chars, {
@@ -92,7 +94,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               scrollTrigger: {
                 trigger: title,
                 start: "top 88%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             });
           });
@@ -109,7 +111,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               scrollTrigger: {
                 trigger: element,
                 start: "top 93%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             }),
           );
@@ -123,7 +125,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             scrollTrigger: {
               trigger: element,
               start: "top 92%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           }),
         );
@@ -148,7 +150,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             scrollTrigger: {
               trigger: ".team-section",
               start: "top 85%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           });
           gsap.to(card, {
@@ -172,7 +174,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             scrollTrigger: {
               trigger: phase,
               start: "top 92%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           }),
         );
@@ -185,7 +187,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           scrollTrigger: {
             trigger: ".contact-section",
             start: "top 80%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           },
         });
         gsap.to(".ticker > div", {
@@ -212,34 +214,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           }
         };
         window.addEventListener("pointermove", onPointer, { passive: true });
-        const magnetic = gsap.utils.toArray<HTMLElement>(
-          ".pill-button, .header-contact, .dark-pill",
-        );
-        magnetic.forEach((button) => {
-          const move = (event: PointerEvent) => {
-            if (event.pointerType !== "mouse") return;
-            const rect = button.getBoundingClientRect();
-            gsap.to(button, {
-              x: (event.clientX - rect.left - rect.width / 2) * 0.16,
-              y: (event.clientY - rect.top - rect.height / 2) * 0.22,
-              duration: 0.35,
-              ease: "power2.out",
-            });
-          };
-          const leave = () =>
-            gsap.to(button, {
-              x: 0,
-              y: 0,
-              duration: 0.6,
-              ease: "elastic.out(1,.4)",
-            });
-          button.addEventListener("pointermove", move);
-          button.addEventListener("pointerleave", leave);
-          cleanups.push(() => {
-            button.removeEventListener("pointermove", move);
-            button.removeEventListener("pointerleave", leave);
-          });
-        });
         const onDisclosure = () => ScrollTrigger.refresh();
         document
           .querySelectorAll("details")
@@ -266,12 +240,12 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           if (!context.conditions?.desktop || !context.conditions?.motion)
             return;
           const chapter = gsap.utils.toArray<HTMLElement>(".build-chapter");
-          gsap.set(chapter.slice(1), { opacity: 0.25 });
+          gsap.set(chapter.slice(1), { opacity: 0.45 });
           const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: ".build-section",
               start: "top top",
-              end: "+=1500",
+              end: "+=900",
               pin: ".build-pin",
               scrub: 1,
               anticipatePin: 1,
@@ -302,7 +276,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               },
               0.7,
             )
-            .to(chapter[0], { opacity: 0.25, duration: 0.3 }, 1.25)
+            .to(chapter[0], { opacity: 0.45, duration: 0.3 }, 1.25)
             .to(chapter[1], { opacity: 1, duration: 0.3 }, 1.25)
             .from(
               ".blueprint-design",
@@ -319,7 +293,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               { rotation: -150, scale: 0.3, duration: 1.5, ease: "power2.out" },
               2,
             )
-            .to(chapter[1], { opacity: 0.25, duration: 0.3 }, 2.5)
+            .to(chapter[1], { opacity: 0.45, duration: 0.3 }, 2.5)
             .to(chapter[2], { opacity: 1, duration: 0.3 }, 2.5)
             .from(
               ".blueprint-button",

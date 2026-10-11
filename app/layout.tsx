@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { siteUrl, siteDescription } from "./site";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -56,8 +57,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
+      data-theme="dark"
+      suppressHydrationWarning
     >
-      <body>{children}</body>
+      <body>
+        <Script
+          id="nst-theme-init"
+          strategy="beforeInteractive"
+        >{`try{var theme=localStorage.getItem('nst-theme');document.documentElement.dataset.theme=theme==='light'?'light':'dark';}catch(e){}`}</Script>
+        {children}
+      </body>
     </html>
   );
 }

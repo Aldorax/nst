@@ -1,3 +1,4 @@
+import { SiteHeader } from "./navigation";
 import { BrandLogo } from "./brand";
 import { organization } from "./site";
 import { MotionExperience } from "./motion";
@@ -12,15 +13,14 @@ import {
   ProjectDialog,
   ContactButton,
   ContactDialog,
-  MobileMenu,
 } from "./ui";
 
 const services = [
   {
     name: "Website development",
-    note: "Built to make an impression. Engineered to last.",
+    note: "Websites built for your business.",
     description:
-      "Fast, accessible websites and custom web experiences. We bring design to life with thoughtful interactions, clean code, and a foundation that grows with your business.",
+      "Responsive websites and web applications with clear content, considered interactions, and a foundation your team can maintain.",
     tags: [
       "Creative development",
       "Web applications",
@@ -30,9 +30,9 @@ const services = [
   },
   {
     name: "Branding & identity",
-    note: "A point of view people recognise.",
+    note: "Give people a reason to remember you.",
     description:
-      "We turn what makes you different into a visual identity with a clear voice. From your first mark to a complete brand system, every detail tells the same story.",
+      "Positioning, identity, and guidelines that make your business recognisable and consistent across every touchpoint.",
     tags: [
       "Brand strategy",
       "Visual identity",
@@ -42,16 +42,16 @@ const services = [
   },
   {
     name: "UI / UX design",
-    note: "Good looks. Even better experiences.",
+    note: "Make the next step feel obvious.",
     description:
-      "Useful, intuitive digital products built around real people. We connect research, structure, and considered interfaces to make every interaction feel effortless.",
+      "Research, flows, and interfaces that help people understand your product and use it with confidence.",
     tags: ["User research", "Product design", "Prototyping", "Design systems"],
   },
   {
     name: "Motion & video",
-    note: "Ideas that refuse to stand still.",
+    note: "Show what words alone cannot.",
     description:
-      "Bring your story into motion with expressive brand animation, product films, and motion systems that hold attention and make complex ideas easy to understand.",
+      "Brand animation, product films, and explainers that give your ideas movement and clarity.",
     tags: [
       "Brand animation",
       "Explainer videos",
@@ -61,9 +61,9 @@ const services = [
   },
   {
     name: "Copy & technical writing",
-    note: "The right words do the heavy lifting.",
+    note: "Say what matters. Make it clear.",
     description:
-      "A sharp headline. A story that connects. Documentation that actually helps. We translate your ideas into clear, purposeful words for your customers and your developers.",
+      "Website copy, brand voice, and technical documentation that help customers decide and developers get things done.",
     tags: [
       "Website copy",
       "Brand voice",
@@ -79,55 +79,31 @@ export default function Home() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="site-header wrap">
-        <a className="wordmark" href="#" aria-label="NST home">
-          <BrandLogo />
-        </a>
-        <span className="brand-caption">
-          NON STANDARD
-          <br />
-          TEAM
-        </span>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="#work">
-            Work <sup>03</sup>
-          </a>
-          <a href="#services">Services</a>
-          <a href="#studio">Studio</a>
-          <a href="#pricing">Pricing</a>
-        </nav>
-        <ContactButton className="header-contact">
-          Let’s talk <span>↗</span>
-        </ContactButton>
-        <MobileMenu />
-      </header>
+      <SiteHeader />
       <main id="main">
         <section className="hero wrap" aria-labelledby="hero-title">
           <div className="hero-topline">
             <span>
-              <i className="status-dot" /> Independent minds. One collective.
+              <i className="status-dot" /> Four people. One connected team.
             </span>
             <span className="small-code">
-              DESIGN × TECHNOLOGY × A LITTLE REBELLION
+              BRANDING / WEBSITES / DIGITAL PRODUCTS
             </span>
           </div>
           <div className="hero-composition">
             <div className="hero-copy">
-              <h1 id="hero-title">
+              <h1 id="hero-title" aria-label="Anything but standard.">
                 Anything
                 <br />
                 but <span>standard.</span>
-                <span className="heading-period" aria-hidden="true">
-                  ✳
-                </span>
               </h1>
               <p>
-                We build brands, websites, and digital experiences
-                <br className="desktop-break" /> for those who dare to do things
-                differently.
+                Branding, websites, and digital products that make your
+                <br className="desktop-break" /> business easier to
+                understand—and harder to overlook.
               </p>
               <ContactButton className="pill-button">
-                Make something different <span>↗</span>
+                Start a project
               </ContactButton>
             </div>
             <div className="hero-art" aria-hidden="true">
@@ -136,18 +112,14 @@ export default function Home() {
               <span className="art-cross cross-one">+</span>
               <span className="art-cross cross-two">+</span>
               <span className="art-caption">FIG. 01 — NO STANDARD FORM</span>
-              <div className="art-coordinate">
-                [ N / S / T ]<br />
-                ALWAYS IN THE MAKING
-              </div>
             </div>
           </div>
           <div className="hero-bottom">
             <span className="availability">
-              <i className="status-dot" /> Open for good collaborations
+              <i className="status-dot" /> Projects from $2,000
             </span>
             <a href="#work">
-              A little less ordinary <span className="circle-arrow">↓</span>
+              Explore our work <span className="circle-arrow">↓</span>
             </a>
             <span className="hero-index">SCROLL TO EXPLORE / 01</span>
           </div>
@@ -162,26 +134,23 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <BuildScene />
         <section
           className="work-section wrap"
           id="work"
           aria-labelledby="work-title"
         >
           <div className="section-top">
-            <span className="eyebrow">02 / CREATIVE EXPLORATIONS</span>
-            <span className="muted small-code">
-              A GLIMPSE OF WHAT’S POSSIBLE
-            </span>
+            <span className="eyebrow">01 / CONCEPT EXPLORATIONS</span>
+            <span className="muted small-code">SELF-INITIATED CONCEPTS</span>
           </div>
           <div className="section-heading">
-            <h2 id="work-title">
-              Different by design<span className="lime">.</span>
+            <h2 id="work-title" aria-label="Ideas in action.">
+              Ideas in action<span className="lime">.</span>
             </h2>
             <p>
-              Fresh perspectives. Thoughtful execution.
+              Three concepts exploring how strategy,
               <br />
-              Here’s where our ideas take shape.
+              design, and development work together.
             </p>
           </div>
           <div className="work-grid">
@@ -216,6 +185,7 @@ export default function Home() {
               </ProjectButton>
               <div className="project-caption">
                 <div>
+                  <span className="project-type">CONCEPT EXPLORATION</span>
                   <h3>Orbit</h3>
                   <p>Fintech, with a fresh perspective.</p>
                 </div>
@@ -251,6 +221,7 @@ export default function Home() {
               </ProjectButton>
               <div className="project-caption">
                 <div>
+                  <span className="project-type">CONCEPT EXPLORATION</span>
                   <h3>Form & Field</h3>
                   <p>A digital home for considered living.</p>
                 </div>
@@ -284,6 +255,7 @@ export default function Home() {
               </ProjectButton>
               <div className="project-caption">
                 <div>
+                  <span className="project-type">CONCEPT EXPLORATION</span>
                   <h3>Pulse</h3>
                   <p>An identity that moves to its own beat.</p>
                 </div>
@@ -292,8 +264,8 @@ export default function Home() {
             </article>
           </div>
           <p className="concept-note">
-            <span>↳</span> Self-initiated concepts. A space to explore,
-            experiment, and push the craft.
+            <span>↳</span> Concept explorations, not client case studies. A look
+            at how we think and what we can build.
           </p>
         </section>
         <section
@@ -302,19 +274,19 @@ export default function Home() {
           aria-labelledby="services-title"
         >
           <div className="services-intro">
-            <span className="eyebrow">03 / WHAT WE DO</span>
-            <h2 id="services-title">
-              From first idea
+            <span className="eyebrow">02 / WHAT WE DO</span>
+            <h2 id="services-title" aria-label="What do you need to build?">
+              What do you
               <br />
-              to <span className="lime">what’s next.</span>
+              <span className="lime">need to build?</span>
             </h2>
             <p>
-              Designers. Developers. Storytellers.
+              Choose one service or bring us the whole project.
               <br />
-              One team connecting all the dots.
+              We connect strategy, design, technology, and words.
             </p>
             <ContactButton className="text-link">
-              Find your next move <span>↗</span>
+              Discuss your project
             </ContactButton>
             <span className="service-asterisk" aria-hidden="true">
               ✳
@@ -342,27 +314,29 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <TeamSection />
+        <BuildScene />
         <TimelineSection />
+        <TeamSection />
         <PricingSection />
         <section className="contact-section" id="contact">
           <div className="wrap">
             <div className="contact-top">
-              <span className="eyebrow">GOT SOMETHING IN MIND?</span>
-              <span>GOOD THINGS START WITH A CONVERSATION.</span>
+              <span className="eyebrow">YOUR NEXT STEP</span>
+              <span>FROM $2,000 / BUILT AROUND YOUR BUSINESS.</span>
             </div>
-            <ContactButton className="contact-big">
-              Let’s make
+            <h2 className="contact-big">
+              Have a project
               <br />
-              some noise<span>↗</span>
-            </ContactButton>
+              in mind?
+            </h2>
             <div className="contact-bottom">
               <p>
-                Your next big thing deserves
-                <br />a non standard team.
+                Tell us what you’re building, what needs to change,
+                <br />
+                and the budget you have in mind.
               </p>
               <ContactButton className="dark-pill">
-                Tell us about it <span>↗</span>
+                Start a project
               </ContactButton>
             </div>
           </div>

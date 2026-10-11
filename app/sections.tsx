@@ -10,43 +10,43 @@ export function BuildScene() {
     >
       <div className="build-pin wrap">
         <div className="build-top">
-          <span className="eyebrow">01 / FROM WHAT IF TO WHAT’S NEXT</span>
+          <span className="eyebrow">03 / FROM IDEA TO LAUNCH</span>
           <span className="build-live">
             <i /> A LITTLE LOOK UNDER THE HOOD
           </span>
         </div>
         <div className="build-layout">
           <div className="build-story">
-            <h2 id="build-title">
-              Good ideas.
+            <h2 id="build-title" aria-label="From idea to launch.">
+              From idea
               <br />
-              Made <em>real.</em>
+              to <em>launch.</em>
             </h2>
             <p>
-              Scroll through the making.
+              A clear message. A distinctive design.
               <br />
-              This is where different takes shape.
+              And the code to bring it together.
             </p>
             <div className="build-chapters">
               <div className="build-chapter">
                 <span>01</span>
                 <div>
-                  <h3>Find the spark.</h3>
-                  <p>A clear story. A different point of view.</p>
+                  <h3>Get the direction right.</h3>
+                  <p>Define your audience, goals, and point of difference.</p>
                 </div>
               </div>
               <div className="build-chapter">
                 <span>02</span>
                 <div>
-                  <h3>Give it a form.</h3>
-                  <p>Design that makes the idea tangible.</p>
+                  <h3>Make the idea tangible.</h3>
+                  <p>Turn that direction into an experience people can use.</p>
                 </div>
               </div>
               <div className="build-chapter">
                 <span>03</span>
                 <div>
-                  <h3>Make it move.</h3>
-                  <p>Thoughtful code. Every detail, alive.</p>
+                  <h3>Build every detail.</h3>
+                  <p>Connect design, content, and motion for launch.</p>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export function BuildScene() {
           </div>
         </div>
         <div className="build-bottom">
-          <span>NO SHORTCUTS. JUST THE GOOD STUFF.</span>
+          <span>DESIGN AND DEVELOPMENT, WORKING TOGETHER.</span>
           <span>KEEP SCROLLING ↓</span>
         </div>
       </div>
@@ -121,106 +121,67 @@ export function BuildScene() {
 
 const crafts = [
   {
-    label: "Strategy",
-    glyph: "↗",
-    className: "craft-strategy",
-    note: "ASK BETTER QUESTIONS",
-  },
-  {
-    label: "Branding",
+    label: "Design & identity",
     glyph: "✳",
     className: "craft-brand",
-    note: "MAKE YOUR MARK",
-  },
-  {
-    label: "UI / UX",
-    glyph: "◉",
-    className: "craft-ux",
-    note: "THINK HUMAN FIRST",
+    note: "RECOGNISABLE BY DESIGN",
   },
   {
     label: "Development",
     glyph: "{ }",
     className: "craft-dev",
-    note: "BUILD WITH INTENTION",
+    note: "BUILT TO WORK",
   },
   {
-    label: "Motion",
+    label: "Motion & video",
     glyph: "≋",
     className: "craft-motion",
-    note: "FEEL SOMETHING",
+    note: "IDEAS IN MOTION",
   },
   {
-    label: "Words",
+    label: "Copy & strategy",
     glyph: "Aa",
     className: "craft-words",
-    note: "SAY IT BETTER",
-  },
-  {
-    label: "Curiosity",
-    glyph: "?",
-    className: "craft-curiosity",
-    note: "NEVER STOP ASKING",
-  },
-  {
-    label: "Craft",
-    glyph: "+",
-    className: "craft-detail",
-    note: "SWEAT THE SMALL STUFF",
+    note: "CLARITY IN EVERY WORD",
   },
 ];
 export function TeamSection() {
   return (
     <section className="team-section" id="studio" aria-labelledby="team-title">
       <div className="team-top wrap">
-        <span className="eyebrow">04 / THE NON STANDARD TEAM</span>
-        <span className="small-code">INDEPENDENT MINDS. SHARED OBSESSION.</span>
+        <span className="eyebrow">
+          05 / A SMALL TEAM. A CONNECTED APPROACH.
+        </span>
+        <span className="small-code">NST / NON STANDARD TEAM</span>
       </div>
       <div className="team-canvas wrap">
-        <div className="team-ghosts" aria-hidden="true">
-          {Array.from({ length: 8 }, (_, i) => (
-            <i key={i} />
-          ))}
-        </div>
         {crafts.map((craft, i) => (
           <div
-            key={craft.label}
             className={`craft-card ${craft.className}`}
-            data-speed={i % 2 === 0 ? "-1" : "1"}
+            key={craft.label}
+            data-speed={i % 2 ? -1 : 1}
           >
-            <span className="craft-index">0{i + 1} / NST</span>
+            <span className="craft-index">OUR CRAFT / 0{i + 1}</span>
             <span className="craft-glyph" aria-hidden="true">
               {craft.glyph}
             </span>
-            <div className="craft-name">
-              {craft.label}
-              <span>↗</span>
-            </div>
+            <span className="craft-name">{craft.label}</span>
             <span className="craft-note">{craft.note}</span>
           </div>
         ))}
         <div className="team-center">
-          <span className="eyebrow">DIFFERENT PEOPLE. SAME ENERGY.</span>
-          <h2 id="team-title">
-            Many minds.
+          <span className="eyebrow">FOUR PEOPLE. FIVE SERVICES.</span>
+          <h2 id="team-title" aria-label="Four people. One connected team.">
+            Four people.
             <br />
-            <em>One team.</em>
+            <em>One connected team.</em>
           </h2>
           <p>
-            Designers, developers, and storytellers.
-            <br />
-            Bringing different perspectives to the same table.
-            <br />
-            From the first spark to the last pixel.
+            We’re NST: Non Standard Team. A four-person agency bringing design,
+            development, motion, and writing together around your project.
           </p>
-          <ContactButton className="dark-pill">
-            Meet your next creative partners <span>↗</span>
-          </ContactButton>
+          <ContactButton className="dark-pill">Start a project</ContactButton>
         </div>
-      </div>
-      <div className="team-bottom wrap">
-        <span>COLLABORATIVE BY NATURE.</span>
-        <span>NON STANDARD, ALWAYS.</span>
       </div>
     </section>
   );
@@ -228,7 +189,7 @@ export function TeamSection() {
 
 const phases = [
   {
-    title: "Discovery & strategy",
+    title: "Discovery & direction",
     tag: "FIND THE DIFFERENCE",
     weeks: "WEEKS 1–2",
     icon: "◎",
@@ -238,7 +199,7 @@ const phases = [
     text: "Goals, audience, positioning, and a creative direction we believe in.",
   },
   {
-    title: "Identity & experience design",
+    title: "Brand & interface design",
     tag: "GIVE IT A FORM",
     weeks: "WEEKS 2–4",
     icon: "✳",
@@ -258,7 +219,7 @@ const phases = [
     text: "Thoughtful engineering, purposeful interactions, and content integration.",
   },
   {
-    title: "Refinement & quality assurance",
+    title: "Testing & refinement",
     tag: "SWEAT THE DETAILS",
     weeks: "WEEKS 5–7",
     icon: "✓",
@@ -286,19 +247,19 @@ export function TimelineSection() {
       aria-labelledby="timeline-title"
     >
       <div className="section-top">
-        <span className="eyebrow">05 / A PLAN, NOT A BLACK BOX</span>
+        <span className="eyebrow">04 / A CLEAR PATH TO LAUNCH</span>
         <span className="small-code muted">YOU’RE PART OF THE PROCESS.</span>
       </div>
       <div className="section-heading">
-        <h2 id="timeline-title">
-          How the good
+        <h2 id="timeline-title" aria-label="A clear path to launch.">
+          A clear path
           <br />
-          stuff <em>gets made.</em>
+          to <em>launch.</em>
         </h2>
         <p>
-          A shared roadmap. Space to explore.
+          See what happens, when decisions are needed,
           <br />
-          And a clear path to getting it live.
+          and how the work comes together.
         </p>
       </div>
       <div className="timeline-scroll">
@@ -336,8 +297,9 @@ export function TimelineSection() {
         </div>
       </div>
       <p className="timeline-note">
-        <span>↳</span> An illustrative 8-week website & brand project. Your
-        timeline is shaped around your scope. Tap a phase to look closer.
+        <span>↳</span> An example eight-week brand and website project. We agree
+        your schedule around the scope before work begins. Select a phase to
+        learn more.
       </p>
     </section>
   );
@@ -352,15 +314,16 @@ export function PricingSection() {
     >
       <div className="pricing-intro">
         <span className="eyebrow">06 / GOOD WORK. CLEAR INVESTMENT.</span>
-        <h2 id="pricing-title">
-          Big ambition.
+        <h2 id="pricing-title" aria-label="A starting price. A clear scope.">
+          A starting price.
           <br />
-          <em>Fair starting point.</em>
+          <em>A clear scope.</em>
         </h2>
         <p>
           Every service starts at <strong>$2,000.</strong>
           <br />
-          The right scope, shaped around your next move.
+          Your quote reflects the deliverables, complexity, and support you
+          need.
         </p>
         <div className="pricing-services">
           {[
@@ -372,13 +335,13 @@ export function PricingSection() {
           ].map((item) => (
             <div key={item}>
               <span>{item}</span>
-              <span>FROM $2,000 ↗</span>
+              <span>FROM $2,000</span>
             </div>
           ))}
         </div>
         <p className="pricing-footnote">
-          All prices in USD. Final investment depends on scope, deliverables,
-          and complexity.
+          All prices in USD. Starting prices apply to individual services;
+          combining services changes the total scope.
         </p>
       </div>
       <PricingSelector />
