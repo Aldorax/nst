@@ -50,8 +50,8 @@ export function BuildScene() {
                 </div>
               </div>
             </div>
-            <a href="#work" className="build-skip">
-              Skip to the explorations ↘
+            <a href="#process" className="build-skip">
+              Explore the project timeline ↘
             </a>
           </div>
           <div className="build-object" aria-hidden="true">

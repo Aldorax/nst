@@ -10,6 +10,8 @@ export const organization = {
   alternateName: "Non Standard Team",
   description: siteDescription,
   email: "legadax@outlook.com",
+  numberOfEmployees: { "@type": "QuantitativeValue", value: 4 },
+  logo: `${siteUrl}/icon.svg`,
   ...(siteUrl ? { url: siteUrl, "@id": `${siteUrl}/#organization` } : {}),
   hasOfferCatalog: {
     "@type": "OfferCatalog",

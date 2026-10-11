@@ -244,7 +244,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: ".build-section",
-              start: "top top",
+              start: "top 88px",
               end: "+=900",
               pin: ".build-pin",
               scrub: 1,

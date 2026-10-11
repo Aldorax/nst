@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { ArrowIcon } from "./icons";
 import { SiteHeader } from "./navigation";
 import { BrandLogo } from "./brand";
 import { organization } from "./site";
@@ -108,7 +110,15 @@ export default function Home() {
             </div>
             <div className="hero-art" aria-hidden="true">
               <div className="art-orbit" />
-              <img className="knot" src="/knot.svg" alt="" />
+              <Image
+                className="knot"
+                src="/knot.svg"
+                alt=""
+                width={600}
+                height={580}
+                unoptimized
+                loading="eager"
+              />
               <span className="art-cross cross-one">+</span>
               <span className="art-cross cross-two">+</span>
               <span className="art-caption">FIG. 01 — NO STANDARD FORM</span>
@@ -181,7 +191,9 @@ export default function Home() {
                     MAKE YOUR NEXT MOVE COUNT. <span>↗</span>
                   </div>
                 </div>
-                <span className="project-open">↗</span>
+                <span className="project-open" aria-hidden="true">
+                  <ArrowIcon />
+                </span>
               </ProjectButton>
               <div className="project-caption">
                 <div>
@@ -217,7 +229,9 @@ export default function Home() {
                     F<span>↗</span>
                   </span>
                 </div>
-                <span className="project-open">↗</span>
+                <span className="project-open" aria-hidden="true">
+                  <ArrowIcon />
+                </span>
               </ProjectButton>
               <div className="project-caption">
                 <div>
@@ -251,7 +265,9 @@ export default function Home() {
                     SOUND / CULTURE / CONNECTION
                   </span>
                 </div>
-                <span className="project-open">↗</span>
+                <span className="project-open" aria-hidden="true">
+                  <ArrowIcon />
+                </span>
               </ProjectButton>
               <div className="project-caption">
                 <div>
