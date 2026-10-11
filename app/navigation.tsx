@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./brand";
-import { ArrowIcon, CloseIcon } from "./icons";
+import { CloseIcon } from "./icons";
 import { ContactButton } from "./ui";
 
 const links = [
@@ -73,6 +73,20 @@ export function ThemeToggle() {
 function MobileMenu() {
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("main");
+  useEffect(() => {
+    const sync = () => setActive(window.location.hash.slice(1) || "main");
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+  const menuLinks = [
+    { label: "Home", target: "main" },
+    { label: "Work", target: "work" },
+    { label: "Services", target: "services" },
+    { label: "Studio", target: "studio" },
+    { label: "Pricing", target: "pricing" },
+  ];
   return (
     <div className="mobile-menu">
       <button
@@ -121,7 +135,6 @@ function MobileMenu() {
             <BrandLogo />
           </a>
           <div>
-            <ThemeToggle />
             <button
               autoFocus
               className="menu-close"
@@ -129,40 +142,36 @@ function MobileMenu() {
               onClick={() => dialog.current?.close()}
             >
               <CloseIcon />
+              <span>Close</span>
             </button>
           </div>
         </div>
-        <span className="eyebrow">NON STANDARD TEAM / EXPLORE</span>
         <nav aria-label="Mobile navigation">
-          {links.map((link, i) => (
+          {menuLinks.map((link, i) => (
             <a
               key={link.target}
               href={`#${link.target}`}
+              aria-current={active === link.target ? "location" : undefined}
               onClick={() => dialog.current?.close()}
             >
+              <span className="menu-link-label">{link.label}</span>
               <span className="menu-number">0{i + 1}</span>
-              <span>{link.label}</span>
-              <ArrowIcon />
             </a>
           ))}
-        </nav>
-        <div className="menu-footer">
           <button
-            className="pill-button"
+            className="menu-contact"
             onClick={() => {
               dialog.current?.close();
               window.dispatchEvent(new Event("nst-contact"));
             }}
           >
-            Start a project
-            <ArrowIcon />
+            <span className="menu-link-label">Contact</span>
+            <span className="menu-number">06</span>
           </button>
+        </nav>
+        <div className="menu-footer">
           <a href="mailto:legadax@outlook.com">legadax@outlook.com</a>
-          <p>
-            Four people. Five services.
-            <br />
-            Projects from $2,000.
-          </p>
+          <p>NON STANDARD TEAM / PROJECTS FROM $2,000</p>
         </div>
       </dialog>
     </div>

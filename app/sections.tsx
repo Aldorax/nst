@@ -1,124 +1,6 @@
 import { ContactButton } from "./ui";
 import { PricingSelector } from "./pricing";
 
-export function BuildScene() {
-  return (
-    <section
-      className="build-section"
-      id="approach"
-      aria-labelledby="build-title"
-    >
-      <div className="build-pin wrap">
-        <div className="build-top">
-          <span className="eyebrow">03 / FROM IDEA TO LAUNCH</span>
-          <span className="build-live">
-            <i /> A LITTLE LOOK UNDER THE HOOD
-          </span>
-        </div>
-        <div className="build-layout">
-          <div className="build-story">
-            <h2 id="build-title" aria-label="From idea to launch.">
-              From idea
-              <br />
-              to <em>launch.</em>
-            </h2>
-            <p>
-              A clear message. A distinctive design.
-              <br />
-              And the code to bring it together.
-            </p>
-            <div className="build-chapters">
-              <div className="build-chapter">
-                <span>01</span>
-                <div>
-                  <h3>Get the direction right.</h3>
-                  <p>Define your audience, goals, and point of difference.</p>
-                </div>
-              </div>
-              <div className="build-chapter">
-                <span>02</span>
-                <div>
-                  <h3>Make the idea tangible.</h3>
-                  <p>Turn that direction into an experience people can use.</p>
-                </div>
-              </div>
-              <div className="build-chapter">
-                <span>03</span>
-                <div>
-                  <h3>Build every detail.</h3>
-                  <p>Connect design, content, and motion for launch.</p>
-                </div>
-              </div>
-            </div>
-            <a href="#process" className="build-skip">
-              Explore the project timeline ↘
-            </a>
-          </div>
-          <div className="build-object" aria-hidden="true">
-            <div className="blueprint-label">
-              NST / DIGITAL ASSEMBLY <span>[ LIVE PREVIEW ]</span>
-            </div>
-            <div className="blueprint">
-              <div className="blueprint-guides">
-                <i />
-                <i />
-                <i />
-                <i />
-                <i />
-                <i />
-              </div>
-              <div className="blueprint-frame" />
-              <div className="blueprint-block block-nav" />
-              <div className="blueprint-block block-heading" />
-              <div className="blueprint-block block-body" />
-              <div className="blueprint-block block-button" />
-              <div className="blueprint-block block-art" />
-              <div className="blueprint-design">
-                <div className="blueprint-nav">
-                  <b>
-                    nst<span>✳</span>
-                  </b>
-                  <span>DESIGNED TO BE DIFFERENT ↗</span>
-                </div>
-                <div className="blueprint-title">
-                  A different
-                  <br />
-                  <em>kind of future.</em>
-                </div>
-                <p>
-                  Extraordinary ideas deserve
-                  <br />
-                  extraordinary experiences.
-                </p>
-                <div className="blueprint-button">Make your move ↗</div>
-                <div className="blueprint-flower">✳</div>
-                <div className="blueprint-footer">
-                  IMAGINED. DESIGNED. DEVELOPED. <span>01 / ∞</span>
-                </div>
-              </div>
-              <span className="measure measure-x">↔ 100% YOU</span>
-              <span className="measure measure-y">BUILT WITH INTENTION</span>
-            </div>
-            <div className="build-progress">
-              <span>IDEA → IDENTITY → EXPERIENCE</span>
-              <b>
-                <span className="build-percentage">000</span>%
-              </b>
-            </div>
-            <div className="build-progress-track">
-              <i />
-            </div>
-          </div>
-        </div>
-        <div className="build-bottom">
-          <span>DESIGN AND DEVELOPMENT, WORKING TOGETHER.</span>
-          <span>KEEP SCROLLING ↓</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 const crafts = [
   {
     label: "Design & identity",
@@ -150,7 +32,7 @@ export function TeamSection() {
     <section className="team-section" id="studio" aria-labelledby="team-title">
       <div className="team-top wrap">
         <span className="eyebrow">
-          05 / A SMALL TEAM. A CONNECTED APPROACH.
+          04 / A SMALL TEAM. A CONNECTED APPROACH.
         </span>
         <span className="small-code">NST / NON STANDARD TEAM</span>
       </div>
@@ -247,7 +129,7 @@ export function TimelineSection() {
       aria-labelledby="timeline-title"
     >
       <div className="section-top">
-        <span className="eyebrow">04 / A CLEAR PATH TO LAUNCH</span>
+        <span className="eyebrow">03 / A CLEAR PATH TO LAUNCH</span>
         <span className="small-code muted">YOU’RE PART OF THE PROCESS.</span>
       </div>
       <div className="section-heading">
@@ -313,7 +195,7 @@ export function PricingSection() {
       aria-labelledby="pricing-title"
     >
       <div className="pricing-intro">
-        <span className="eyebrow">06 / GOOD WORK. CLEAR INVESTMENT.</span>
+        <span className="eyebrow">05 / GOOD WORK. CLEAR INVESTMENT.</span>
         <h2 id="pricing-title" aria-label="A starting price. A clear scope.">
           A starting price.
           <br />

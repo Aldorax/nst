@@ -4,12 +4,7 @@ import { SiteHeader } from "./navigation";
 import { BrandLogo } from "./brand";
 import { organization } from "./site";
 import { MotionExperience } from "./motion";
-import {
-  BuildScene,
-  TeamSection,
-  TimelineSection,
-  PricingSection,
-} from "./sections";
+import { TeamSection, TimelineSection, PricingSection } from "./sections";
 import {
   ProjectButton,
   ProjectDialog,
@@ -304,9 +299,6 @@ export default function Home() {
             <ContactButton className="text-link">
               Discuss your project
             </ContactButton>
-            <span className="service-asterisk" aria-hidden="true">
-              ✳
-            </span>
           </div>
           <div className="services-list">
             {services.map((service, i) => (
@@ -330,7 +322,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <BuildScene />
         <TimelineSection />
         <TeamSection />
         <PricingSection />

@@ -57,14 +57,12 @@ export function MotionExperience({ children }: { children: ReactNode }) {
         gsap.from(".hero-art", {
           scale: 0.75,
           opacity: 0,
-          rotate: -18,
           duration: 1.5,
           ease: "power3.out",
           delay: 0.15,
         });
         gsap.to(".hero-art", {
-          y: 90,
-          rotation: 16,
+          y: 40,
           ease: "none",
           scrollTrigger: {
             trigger: ".hero",
@@ -75,7 +73,7 @@ export function MotionExperience({ children }: { children: ReactNode }) {
         });
         gsap.utils
           .toArray<HTMLElement>(
-            ".section-heading h2, .services-intro h2, .team-center h2, .pricing-intro h2, .build-story h2",
+            ".section-heading h2, .services-intro h2, .team-center h2, .pricing-intro h2",
           )
           .forEach((title) => {
             const split = SplitText.create(title, {
@@ -129,16 +127,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
             },
           }),
         );
-        gsap.to(".service-asterisk", {
-          rotation: 240,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".services-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
         gsap.utils.toArray<HTMLElement>(".craft-card").forEach((card, i) => {
           gsap.from(card, {
             y: 80,
@@ -153,16 +141,18 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               toggleActions: "play none none none",
             },
           });
-          gsap.to(card, {
-            y: Number(card.dataset.speed) * 65,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".team-section",
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.3,
-            },
-          });
+          if (window.matchMedia("(min-width: 900px)").matches) {
+            gsap.to(card, {
+              y: Number(card.dataset.speed) * 45,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".team-section",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.3,
+              },
+            });
+          }
         });
         gsap.utils.toArray<HTMLElement>(".timeline-phase").forEach((phase, i) =>
           gsap.from(phase, {
@@ -231,83 +221,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
           splits.forEach((split) => split.revert());
         };
       });
-      media.add(
-        {
-          desktop: "(min-width: 900px)",
-          motion: "(prefers-reduced-motion: no-preference)",
-        },
-        (context) => {
-          if (!context.conditions?.desktop || !context.conditions?.motion)
-            return;
-          const chapter = gsap.utils.toArray<HTMLElement>(".build-chapter");
-          gsap.set(chapter.slice(1), { opacity: 0.45 });
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: ".build-section",
-              start: "top 88px",
-              end: "+=900",
-              pin: ".build-pin",
-              scrub: 1,
-              anticipatePin: 1,
-              onUpdate: (self) => {
-                const percentage = document.querySelector(".build-percentage");
-                if (percentage)
-                  percentage.textContent = String(
-                    Math.round(self.progress * 100),
-                  ).padStart(3, "0");
-              },
-            },
-          });
-          timeline
-            .from(
-              ".blueprint-frame",
-              { scaleX: 0, transformOrigin: "left", duration: 1, ease: "none" },
-              0,
-            )
-            .from(".blueprint-guides", { opacity: 0, duration: 0.6 }, 0.3)
-            .from(
-              ".blueprint-block",
-              {
-                scaleY: 0,
-                opacity: 0,
-                transformOrigin: "top",
-                stagger: 0.12,
-                duration: 0.6,
-              },
-              0.7,
-            )
-            .to(chapter[0], { opacity: 0.45, duration: 0.3 }, 1.25)
-            .to(chapter[1], { opacity: 1, duration: 0.3 }, 1.25)
-            .from(
-              ".blueprint-design",
-              { opacity: 0, scale: 0.95, duration: 1 },
-              1.6,
-            )
-            .to(
-              ".blueprint-block, .blueprint-guides",
-              { opacity: 0, duration: 0.5 },
-              1.6,
-            )
-            .from(
-              ".blueprint-flower",
-              { rotation: -150, scale: 0.3, duration: 1.5, ease: "power2.out" },
-              2,
-            )
-            .to(chapter[1], { opacity: 0.45, duration: 0.3 }, 2.5)
-            .to(chapter[2], { opacity: 1, duration: 0.3 }, 2.5)
-            .from(
-              ".blueprint-button",
-              { y: 25, opacity: 0, duration: 0.5 },
-              2.6,
-            )
-            .to(
-              ".build-progress-track i",
-              { scaleX: 1, duration: 3.4, ease: "none" },
-              0,
-            );
-          return () => {};
-        },
-      );
       ScrollTrigger.refresh();
     });
     return () => {
