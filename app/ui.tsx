@@ -140,7 +140,7 @@ export function ContactDialog() {
   function prepareBrief(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const result = `NST — Project brief\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nService: ${data.get("service")}\nBudget: ${data.get("budget")}\n\nProject:\n${data.get("project")}\n`;
+    const result = `NST — Project brief\n\nName: ${data.get("name")}\nEmail: ${data.get("email")}\nService: ${data.get("service")}\nBudget: ${data.get("budget")}\nCompany stage: ${data.get("stage")}\n\nProject:\n${data.get("project")}\n`;
     setBrief(result);
   }
   function downloadBrief() {
@@ -250,13 +250,21 @@ export function ContactDialog() {
               Budget range
               <select name="budget">
                 <option>Let’s discuss</option>
-                <option>Under $5,000</option>
+                <option>$2,000–$5,000</option>
                 <option>$5,000–$15,000</option>
                 <option>$15,000–$30,000</option>
-                <option>$30,000+</option>
+                <option>$30,000–$50,000</option>
+                <option>$50,000+ (funded companies)</option>
               </select>
             </label>
           </div>
+          <label>
+            Company stage
+            <select name="stage">
+              <option>Startup</option>
+              <option>Funded company</option>
+            </select>
+          </label>
           <label>
             Tell us about your idea
             <textarea
@@ -293,7 +301,7 @@ export function MobileMenu() {
       </button>
       {open && (
         <nav id="mobile-navigation" aria-label="Mobile navigation">
-          {["Work", "Services", "Studio"].map((item) => (
+          {["Work", "Services", "Studio", "Pricing"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}

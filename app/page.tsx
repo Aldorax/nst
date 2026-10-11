@@ -1,3 +1,12 @@
+import { BrandLogo } from "./brand";
+import { organization } from "./site";
+import { MotionExperience } from "./motion";
+import {
+  BuildScene,
+  TeamSection,
+  TimelineSection,
+  PricingSection,
+} from "./sections";
 import {
   ProjectButton,
   ProjectDialog,
@@ -66,13 +75,13 @@ const services = [
 
 export default function Home() {
   return (
-    <>
+    <MotionExperience>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
       <header className="site-header wrap">
         <a className="wordmark" href="#" aria-label="NST home">
-          nst<span>®</span>
+          <BrandLogo />
         </a>
         <span className="brand-caption">
           NON STANDARD
@@ -85,6 +94,7 @@ export default function Home() {
           </a>
           <a href="#services">Services</a>
           <a href="#studio">Studio</a>
+          <a href="#pricing">Pricing</a>
         </nav>
         <ContactButton className="header-contact">
           Let’s talk <span>↗</span>
@@ -107,7 +117,9 @@ export default function Home() {
                 Anything
                 <br />
                 but <span>standard.</span>
-                <span className="heading-period">®</span>
+                <span className="heading-period" aria-hidden="true">
+                  ✳
+                </span>
               </h1>
               <p>
                 We build brands, websites, and digital experiences
@@ -150,13 +162,14 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <BuildScene />
         <section
           className="work-section wrap"
           id="work"
           aria-labelledby="work-title"
         >
           <div className="section-top">
-            <span className="eyebrow">01 / CREATIVE EXPLORATIONS</span>
+            <span className="eyebrow">02 / CREATIVE EXPLORATIONS</span>
             <span className="muted small-code">
               A GLIMPSE OF WHAT’S POSSIBLE
             </span>
@@ -289,7 +302,7 @@ export default function Home() {
           aria-labelledby="services-title"
         >
           <div className="services-intro">
-            <span className="eyebrow">02 / WHAT WE DO</span>
+            <span className="eyebrow">03 / WHAT WE DO</span>
             <h2 id="services-title">
               From first idea
               <br />
@@ -313,6 +326,7 @@ export default function Home() {
                 <summary>
                   <span className="service-number">0{i + 1}</span>
                   <h3>{service.name}</h3>
+                  <span className="service-starting">FROM $2,000</span>
                   <span className="expand-icon" />
                 </summary>
                 <div className="service-content">
@@ -328,68 +342,9 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section
-          className="studio-section wrap"
-          id="studio"
-          aria-labelledby="studio-title"
-        >
-          <div className="studio-label">
-            <span className="eyebrow">03 / THE NON STANDARD TEAM</span>
-            <div className="mini-mark" aria-hidden="true">
-              n<span>↗</span>
-            </div>
-          </div>
-          <div className="studio-copy">
-            <h2 id="studio-title">
-              Different minds.
-              <br />
-              Shared <em>obsession.</em>
-            </h2>
-            <p>
-              We’re NST. A collective of curious thinkers and hands-on makers.
-              We bring design, development, motion, and words together to help
-              ambitious brands find their own way.
-            </p>
-            <p className="muted">
-              We question the obvious. Sweat the details. And work with you,
-              from the first “what if” to the final “it’s live.” Because the
-              best work happens when we build it together.
-            </p>
-            <div className="principles">
-              <span>Independent in spirit.</span>
-              <span>Collaborative by nature.</span>
-              <span>Non standard, always.</span>
-            </div>
-          </div>
-        </section>
-        <section className="process-section wrap">
-          <span className="eyebrow">04 / HOW WE GET THERE</span>
-          <div className="process-grid">
-            {[
-              {
-                title: "Find the difference.",
-                text: "We listen, ask better questions, and get to the heart of what makes your brand yours.",
-              },
-              {
-                title: "Make it matter.",
-                text: "We connect strategy, design, and words. Exploring the possibilities, together.",
-              },
-              {
-                title: "Bring it to life.",
-                text: "We build, refine, and launch with care. Then help you take the next step.",
-              },
-            ].map((step, i) => (
-              <div className="process-step" key={step.title}>
-                <span className="process-number">
-                  0{i + 1}
-                  <span>↗</span>
-                </span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <TeamSection />
+        <TimelineSection />
+        <PricingSection />
         <section className="contact-section" id="contact">
           <div className="wrap">
             <div className="contact-top">
@@ -415,7 +370,7 @@ export default function Home() {
       </main>
       <footer className="site-footer wrap">
         <a href="#" className="wordmark">
-          nst<span>®</span>
+          <BrandLogo />
         </a>
         <span className="footer-manifesto">
           NON STANDARD TEAM.
@@ -428,8 +383,14 @@ export default function Home() {
         <span>© 2026 NST</span>
         <a href="#main">Back to top ↑</a>
       </footer>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
+        }}
+      />
       <ProjectDialog />
       <ContactDialog />
-    </>
+    </MotionExperience>
   );
 }
