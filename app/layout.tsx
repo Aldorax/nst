@@ -4,6 +4,8 @@ import { SiteHeader } from "./navigation";
 import { SiteFooter } from "./shared";
 import { StudioIntro } from "./intro";
 import { PageTransition, PageEntrance } from "./transitions";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { siteUrl, siteDescription } from "./site";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -85,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Suspense fallback={null}>
           <PageTransition />
         </Suspense>
+        <Analytics />
       </body>
     </html>
   );
