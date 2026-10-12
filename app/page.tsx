@@ -64,8 +64,8 @@ export default function Home() {
           aria-labelledby="work-title"
         >
           <div className="section-top">
-            <span className="eyebrow">02 / CONCEPT EXPLORATIONS</span>
-            <span className="muted small-code">SELF-INITIATED CONCEPTS</span>
+            <span className="eyebrow">02 / SELECTED WORK</span>
+            <span className="muted small-code">DESIGN / DIGITAL / PRODUCT</span>
           </div>
           <div className="section-heading">
             <h2 id="work-title" aria-label="A different point of view.">
@@ -74,13 +74,13 @@ export default function Home() {
               <em>point of view.</em>
             </h2>
             <p>
-              Brand, digital, and motion.
+              Interfaces, websites, and visual thinking.
               <br />
-              Three self-initiated explorations.
+              A few different points of view.
             </p>
           </div>
           <div className="home-gallery">
-            <WorkGallery />
+            <WorkGallery featured />
           </div>
         </section>
         <TeamSection />

@@ -2,8 +2,8 @@ import { PageHero, ClosingNote } from "../shared";
 import { WorkGallery } from "../gallery";
 import { pageMetadata } from "../meta";
 export const metadata = pageMetadata(
-  "Work & explorations",
-  "Explore NST concepts across branding, development, product design, motion, copy, and documentation.",
+  "Selected work",
+  "Explore NST’s selected websites, product interfaces, redesigns, and editorial experiences.",
   "/work",
 );
 export default function WorkPage() {
@@ -12,7 +12,7 @@ export default function WorkPage() {
       <PageHero
         label="OUR CREATIVE RANGE"
         title="Different ideas. Distinctive execution."
-        text="Brand systems, digital experiences, motion, and words. Five self-initiated explorations of what a non standard team can bring together."
+        text="Live websites. Product interfaces. Fresh perspectives on familiar experiences. Take a closer look at the work."
       />
       <WorkGallery />
       <ClosingNote title="Make your project the next conversation." />

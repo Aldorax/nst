@@ -117,11 +117,11 @@ async function ServiceContent({
             in action.
           </h2>
           <p>
-            A self-initiated concept showing one possible creative direction.
+            Explore selected websites, interfaces, and visual studies.
           </p>
         </div>
-        <TransitionLink href={`/work/${item.project}`} className="pill-button">
-          Inside the exploration ↗
+        <TransitionLink href="/work" className="pill-button">
+          Browse the work ↗
         </TransitionLink>
       </section>
       <ClosingNote title={`Let’s talk ${item.name.toLowerCase()}.`} />

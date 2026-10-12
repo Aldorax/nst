@@ -1,0 +1,97 @@
+{
+  "wallet-light": {
+    "src": "/work/wallet-light.webp",
+    "width": 1600,
+    "height": 901
+  },
+  "wallet-dark": {
+    "src": "/work/wallet-dark.webp",
+    "width": 1600,
+    "height": 901
+  },
+  "kandela": {
+    "src": "/work/kandela.webp",
+    "width": 1504,
+    "height": 1128
+  },
+  "pay4me": {
+    "src": "/work/pay4me.webp",
+    "width": 1600,
+    "height": 1571
+  },
+  "connecticut": {
+    "src": "/work/connecticut.webp",
+    "width": 1600,
+    "height": 1200
+  },
+  "pleasant-place": {
+    "src": "/work/pleasant-place.webp",
+    "width": 1600,
+    "height": 1252
+  },
+  "vaultx-page": {
+    "src": "/work/vaultx-page.webp",
+    "width": 1600,
+    "height": 5583
+  },
+  "vaultx": {
+    "src": "/work/vaultx.webp",
+    "width": 1600,
+    "height": 1200
+  },
+  "jamb": {
+    "src": "/work/jamb.webp",
+    "width": 1600,
+    "height": 7354
+  },
+  "efosa": {
+    "src": "/work/efosa.webp",
+    "width": 1600,
+    "height": 1200
+  },
+  "winamp": {
+    "src": "/work/winamp.webp",
+    "width": 1600,
+    "height": 1200
+  },
+  "auvra": {
+    "src": "/work/auvra.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "aldorax": {
+    "src": "/work/aldorax.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "safeentry": {
+    "src": "/work/safeentry.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "goodie": {
+    "src": "/work/goodie.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "heather": {
+    "src": "/work/heather.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "repute": {
+    "src": "/work/repute.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "scrolls": {
+    "src": "/work/scrolls.webp",
+    "width": 1436,
+    "height": 997
+  },
+  "tadlab": {
+    "src": "/work/tadlab.webp",
+    "width": 1440,
+    "height": 1000
+  }
+}

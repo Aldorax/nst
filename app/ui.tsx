@@ -35,7 +35,7 @@ export function ProjectButton({
     <TransitionLink
       className={className}
       href={`/work/${project}`}
-      aria-label={`Explore ${projects.find((item) => item.slug === project)?.title} concept`}
+      aria-label={`Explore ${projects.find((item) => item.slug === project)?.title} project`}
     >
       {children}
     </TransitionLink>
