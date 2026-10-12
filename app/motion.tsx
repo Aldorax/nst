@@ -153,21 +153,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               },
             );
           });
-        gsap.fromTo(
-          ".field-backdrop, .sound-backdrop",
-          { scale: 1.18, yPercent: -4 },
-          {
-            scale: 1,
-            yPercent: 4,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".field-scene",
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          },
-        );
         gsap.to(".discipline-object", {
           rotation: 35,
           scale: 1.12,
@@ -262,32 +247,6 @@ export function MotionExperience({ children }: { children: ReactNode }) {
               },
             });
           });
-        gsap.to(".orbit-credit", {
-          y: -18,
-          rotation: -14,
-          duration: 4,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          scrollTrigger: {
-            trigger: ".orbit-scene",
-            start: "top bottom",
-            end: "bottom top",
-            toggleActions: "play pause resume pause",
-          },
-        });
-        gsap.to(".sound-bars i", {
-          scaleY: 0.55,
-          duration: 1.8,
-          stagger: { each: 0.09, repeat: -1, yoyo: true },
-          ease: "sine.inOut",
-          scrollTrigger: {
-            trigger: ".sound-scene",
-            start: "top bottom",
-            end: "bottom top",
-            toggleActions: "play pause resume pause",
-          },
-        });
         gsap.to(".ticker > div", {
           xPercent: -12,
           ease: "none",
